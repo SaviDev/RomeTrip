@@ -62,6 +62,7 @@ function App() {
             <span className={`block w-5 h-0.5 bg-white rounded transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
           </button>
         </div>
+      </div>
 
         {/* Dropdown Menu */}
         {menuOpen && (
