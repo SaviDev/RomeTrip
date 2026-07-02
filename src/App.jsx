@@ -1,9 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { scheduleData } from './data/schedule'
 
 function App() {
   const [activeDay, setActiveDay] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
+
+  // Calcola il giorno attuale all'avvio
+  useEffect(() => {
+    const today = new Date();
+    const isYear2026 = today.getFullYear() === 2026;
+    const isMonthJuly = today.getMonth() === 6; // Luglio è 6 (0-indexed)
+
+    if (isYear2026 && isMonthJuly) {
+      const date = today.getDate();
+      // Mappa delle date: 2 -> Indice 0, 3 -> Indice 1, 4 -> Indice 2, 5 -> Indice 3
+      if (date >= 2 && date <= 5) {
+        setActiveDay(date - 2);
+      }
+    }
+  }, []);
 
   const googleDriveLink = "https://drive.google.com/drive/folders/1FToNHTCCGVssfJD-5lAfl5qQIvpJMl2D?usp=sharing"
 
