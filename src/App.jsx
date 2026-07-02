@@ -38,12 +38,25 @@ function App() {
             <p className="text-deep-blue font-bold mt-0.5 uppercase tracking-widest text-[10px]">Savietto's family</p>
           </div>
 
-          {/* Hamburger Button */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex flex-col justify-center items-center w-11 h-11 bg-deep-blue rounded-xl shadow-lg gap-1.5 active:scale-90 transition-all"
-            aria-label="Menu"
-          >
+          {/* Quick Actions */}
+          <div className="flex items-center gap-3">
+            {/* Hotel Quick Link */}
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Hotel+AltaDomus+Roma"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-11 h-11 bg-white border-2 border-deep-blue text-deep-blue rounded-xl shadow-md active:scale-90 transition-all font-bold text-xl"
+              title="Naviga verso l'Hotel"
+            >
+              🏨
+            </a>
+
+            {/* Hamburger Button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex flex-col justify-center items-center w-11 h-11 bg-deep-blue rounded-xl shadow-lg gap-1.5 active:scale-90 transition-all"
+              aria-label="Menu"
+            >
             <span className={`block w-5 h-0.5 bg-white rounded transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
             <span className={`block w-5 h-0.5 bg-white rounded transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
             <span className={`block w-5 h-0.5 bg-white rounded transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
