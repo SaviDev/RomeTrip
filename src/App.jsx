@@ -108,12 +108,16 @@ function App() {
     setShowAddForm(false)
   }
 
-  const deleteItem = (id) => {
-    setChecklist(prev => prev.filter(item => item.id !== id))
+  const deleteItem = (id, itemTitle) => {
+    if (window.confirm(`Sei sicuro di voler eliminare "${itemTitle}" dalla lista?`)) {
+      setChecklist(prev => prev.filter(item => item.id !== id))
+    }
   }
 
   const resetChecklist = () => {
-    setChecklist(checklistData.map(item => ({ ...item, checkedBy: [] })))
+    if (window.confirm("Vuoi deselezionare tutte le spunte della checklist?")) {
+      setChecklist(checklistData.map(item => ({ ...item, checkedBy: [] })))
+    }
   }
 
   const categories = ['tutti', ...new Set(checklist.map(i => i.category))]
@@ -884,9 +888,9 @@ function App() {
                             {editingItemId === item.id ? "Chiudi" : "✏️ Chi la porta"}
                           </button>
 
-                          {/* Delete Item Button */}
+                          {/* Delete Item Button with Confirmation */}
                           <button
-                            onClick={() => deleteItem(item.id)}
+                            onClick={() => deleteItem(item.id, item.item)}
                             className="text-stone-300 hover:text-red-600 p-1 transition-colors text-xs font-bold"
                             title="Elimina oggetto"
                           >
