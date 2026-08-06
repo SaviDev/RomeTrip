@@ -1,16 +1,21 @@
-# React + Vite
+# Toscana 2026 - Ritiro Estivo in Maremma 🍷🌾
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Web Application per il soggiorno ed esplorazione della Maremma Toscana.
 
-Currently, two official plugins are available:
+## 📅 Dettagli del Viaggio
+- **Date**: Dal 30 luglio al 2 agosto 2026 (4 giorni / 3 notti)
+- **Location**: Poderi Di Montemerano (Via del Santarello 35, Manciano - GR)
+- **Mezzi**: 3 Autovetture (Bass, Mamma di Bass, Chiara VK)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Caratteristiche dell'App
+- **Programma Interattivo**: Dettaglio giorno per giorno (30 Luglio - 2 Agosto) con collegamenti diretti a Google Maps per borghi, spiagge dell'Argentario e terme.
+- **Logistica Trasporti**: Orari di partenza, check-in, check-out e dettagli autovetture.
+- **Dettaglio Alloggio**: Mappa, link a Booking e note sulla struttura.
+- **Budget & Calcolatore Costi**: Tabella riassuntiva spese fisse e giornaliere, con calcolatore interattivo per persona.
+- **Checklist 'Cose da Portare'**: Lista interattiva con persistenza nello storage locale per non dimenticare nulla!
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## 💻 Sviluppo
+```bash
+npm install
+npm run dev
+```

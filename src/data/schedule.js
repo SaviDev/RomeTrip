@@ -1,242 +1,292 @@
+export const lodgingData = {
+  name: "Poderi Di Montemerano",
+  address: "Via del Santarello 35, Manciano (GR)",
+  dates: "11 - 14 Agosto 2026",
+  duration: "4 giorni / 3 notti",
+  checkIn: "Dalle 15:00 alle 19:00 (Arrivo previsto h 11:00)",
+  checkOut: "Dalle 08:00 alle 11:00",
+  bookingUrl: "https://www.booking.com/hotel/it/poderi-di-montemerano.it.html",
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano+Via+del+Santarello+35+Manciano",
+  notes: "Sistemazione immersa nella serena Maremma Toscana, con spazi esterni e piscina. Ideale per relax e grigliate!"
+};
+
+export const logisticsData = {
+  departureDate: "11 Agosto 2026",
+  departureMeeting: "Parcheggio Martini",
+  departureTime: "06:00",
+  arrivalTime: "11:00 (stimato, circa 5 ore + soste)",
+  breakfastSpot: "Colazione in autogrill lungo il tragitto",
+  returnDate: "14 Agosto 2026",
+  returnDepartureTime: "11:00 / 12:00 (post check-out)",
+  returnArrivalTime: "17:00 / 18:00 (circa 5h30m - 6h)",
+  cars: [
+    { id: 1, name: "Auto 1", driver: "Bass", description: "Trasporto gruppo e bagagli" },
+    { id: 2, name: "Auto 2", driver: "Io (Mamma di Bass)", description: "Trasporto gruppo e bagagli" },
+    { id: 3, name: "Auto 3", driver: "Chiara VK", description: "Da definire la composizione equipaggio" }
+  ]
+};
+
+export const costsData = {
+  sharedFixed: [
+    { item: "Alloggio (Poderi Di Montemerano)", totalCost: 1111.91, perPerson: 123.55, note: "Totale alloggio per la durata del soggiorno" },
+    { item: "Carburante / Auto (pieni stimati)", totalCost: 180.00, perPerson: 30.00, note: "180€ totali per 3 auto / pieni (circa 15-30€ a testa su 6-9 pers)" },
+    { item: "Tassa di soggiorno", totalCost: 36.00, perPerson: 4.00, note: "4€ a persona" }
+  ],
+  subtotalFixedPerPerson: 157.55,
+  dailyBreakdown: [
+    {
+      day: "Giorno 1 (11 Agosto)",
+      items: [
+        { label: "Pranzo al volo / Tavola calda", amount: 20 },
+        { label: "Spesa inizio avventura", amount: 20 },
+        { label: "Cena tipica maremmana", amount: 50 },
+        { label: "Visita Santuario Animali", amount: 20 },
+        { label: "Spese varie & Souvenir", amount: 30 }
+      ],
+      dayTotal: 140
+    },
+    {
+      day: "Giorno 2 (12 Agosto)",
+      items: [
+        { label: "Cibo per il mare (pranzo al sacco / pasta fredda)", amount: 20 },
+        { label: "Spese varie, souvenirs, escursioni", amount: 30 }
+      ],
+      dayTotal: 50
+    },
+    {
+      day: "Giorno 3 (13 Agosto)",
+      items: [
+        { label: "Grigliata di carne/verdure a casa", amount: 15 },
+        { label: "Terme naturali", amount: 0, note: "Gratis! ♨️" }
+      ],
+      dayTotal: 15
+    },
+    {
+      day: "Giorno 4 (14 Agosto)",
+      items: [
+        { label: "Colazione & Sosta rientro", amount: 10 }
+      ],
+      dayTotal: 10
+    }
+  ],
+  baseTotalPerPerson: 372.55,
+  contingencyBuffer: 50.00,
+  grandTotalPerPerson: 422.55
+};
+
+export const checklistData = [
+  { id: 1, item: "Tovaglia", assignedTo: ["Bass"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 2, item: "Straccio", assignedTo: ["Cla"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 3, item: "Candela decorativa", assignedTo: ["Maddi"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 4, item: "Candele per zanzare", assignedTo: ["Da comprare"], checkedBy: [], category: "Spesa comune" },
+  { id: 5, item: "Olio d'oliva", assignedTo: ["Da comprare"], checkedBy: [], category: "Spesa comune" },
+  { id: 6, item: "Sale", assignedTo: ["Maddi"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 7, item: "Zucchero", assignedTo: ["Meryland"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 8, item: "Caffè", assignedTo: ["Da comprare"], checkedBy: [], category: "Spesa comune" },
+  { id: 9, item: "Borse Frigo", assignedTo: ["Io", "Cla", "Onga", "Maddi", "Chiara"], checkedBy: [], category: "Mare & Viaggio" },
+  { id: 10, item: "Spruzzo Multiuso detergenti", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
+  { id: 11, item: "Spugnetta per piatti", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
+  { id: 12, item: "Detersivo per piatti", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
+  { id: 13, item: "Sacchetti per immondizia", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
+  { id: 14, item: "Moka per il caffè", assignedTo: ["Bass"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 15, item: "Scottex / Carta casa", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
+  { id: 16, item: "Cassa Audio Bluetooth", assignedTo: ["Bass"], checkedBy: [], category: "Svago" },
+  { id: 17, item: "Quickstop / Carte da gioco", assignedTo: ["Meryland", "Dave"], checkedBy: [], category: "Svago" },
+  { id: 18, item: "Pistole d'acqua Dave", assignedTo: ["Dave"], checkedBy: [], category: "Svago" },
+  { id: 19, item: "Schiscette e contenitori cibo", assignedTo: ["Maddi", "Io", "Meryland", "Onga"], checkedBy: [], category: "Mare & Viaggio" }
+];
+
 export const scheduleData = [
   {
-    day: "Giovedì 2 Luglio 2026",
+    dayIndex: 0,
+    day: "11 Agosto 2026",
+    title: "Borghi & Maremma",
+    highlight: "Arrivo in Maremma, borghi medievali e cena tipica",
     events: [
-      { 
-        time: "06:50", 
-        title: "Inizio Viaggio", 
-        location: "Casa", 
-        notes: "Si parte con la colazione a casa. La zia ci accompagna in stazione.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Stazione+di+Castelfranco+Veneto"
+      {
+        time: "06:00",
+        title: "Partenza dal Parcheggio Martini",
+        location: "Parcheggio Martini",
+        notes: "Partenza in orario mattutino per massimizzare il primo pomeriggio. Sosta colazione in autogrill lungo il viaggio.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Parcheggio+Martini"
       },
-      { 
-        time: "07:39", 
-        title: "Treno da Castelfranco", 
-        location: "Stazione Castelfranco", 
-        notes: "Treno regionale per Padova.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Stazione+di+Castelfranco+Veneto"
+      {
+        time: "11:00",
+        title: "Arrivo ai Poderi Di Montemerano",
+        location: "Via del Santarello 35, Manciano (GR)",
+        notes: "Primo contatto con la struttura e scarico bagagli preliminare. L'arrivo anticipato consente di godersi la prima mezza giornata.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano+Via+del+Santarello+35+Manciano",
+        link: { label: "🏨 Link Booking Alloggio", url: "https://www.booking.com/hotel/it/poderi-di-montemerano.it.html" }
       },
-      { 
-        time: "08:50", 
-        title: "Partenza da Padova", 
-        location: "Stazione di Padova", 
-        notes: "Treno ad alta velocità per Roma Termini.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Stazione+di+Padova"
+      {
+        time: "12:30",
+        title: "Pranzo Leggero",
+        location: "Manciano / Vicinanze Struttura",
+        notes: "Pasto rapido (picnic o tavola calda/bar nelle vicinanze) prima dell'accesso alle camere.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Bar+Ristorante+Manciano"
       },
-      { 
-        time: "12:05", 
-        title: "Arrivo a Roma Termini", 
-        location: "Roma Termini", 
-        notes: "Arrivo previsto a mezzogiorno.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Roma+Termini"
+      {
+        time: "15:00 - 19:00",
+        title: "Check-in & Sistemazione Camere",
+        location: "Poderi Di Montemerano",
+        notes: "Orario ufficiale di Check-in. Assegnazione camere e relax iniziale.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
       },
-      { 
-        time: "12:15", 
-        title: "Deposito Valigie", 
-        location: "Hotel AltaDomus", 
-        notes: "L'hotel si trova a soli 4 minuti a piedi dalla stazione Termini.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Hotel+AltaDomus+Roma",
-        link: { label: "🏨 Sito Hotel", url: "https://www.hotelaltadomus.it" }
+      {
+        time: "16:30",
+        title: "Esplorazione Borghi Limitrofi",
+        location: "Maremma Toscana",
+        notes: "Giro turistico dei pittoreschi borghi vicini e opzione visita Santuario Faunistico.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Montemerano+GR",
+        options: [
+          { name: "Montemerano", dist: "7 min", desc: "Pregevole borgo medievale, vicinissimo alla casa, perfetto per una passeggiata romantica.", maps: "https://www.google.com/maps/search/?api=1&query=Montemerano" },
+          { name: "Manciano", dist: "7 min", desc: "Capoluogo con fantastica vista panoramica. Famoso per la Sagra dei Pici!", maps: "https://www.google.com/maps/search/?api=1&query=Manciano" },
+          { name: "Semproniano", dist: "28 min", desc: "Ulteriore borgo di grande interesse storico e paesaggistico.", maps: "https://www.google.com/maps/search/?api=1&query=Semproniano" }
+        ]
       },
-      { 
-        time: "Pranzo", 
-        title: "Pranzo veloce", 
-        location: "Termini Area", 
-        notes: "Pranzo al sacco o take away veloce (paninozzo e ovetto Kuretto).",
-        maps: "https://www.google.com/maps/search/?api=1&query=Pranzo+Roma+Termini"
-      },
-      { 
-        time: "Pomeriggio", 
-        title: "Vittoriano & Foro Romano", 
-        location: "Piazza Venezia", 
-        notes: "Visita al Monumento Vittorio Emanuele II (il \"Vittoriano\") e passeggiata lungo i Fori Imperiali fino al Colosseo. Il monumento è gratuito e offre una vista panoramica spettacolare dalla terrazza.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Altare+della+Patria",
-        link: { label: "ℹ️ Info Guida", url: "https://www.museiincomuneroma.it/il-vittoriano" }
-      },
-      { 
-        time: "15:40", 
-        title: "Colosseo", 
-        location: "Colosseo", 
-        notes: "Visita prenotata per mamma, papà e dodo. Durata circa 20 min. Il Colosseo, costruito nel 70-80 d.C., poteva ospitare fino a 80.000 spettatori. Ricordati di portare il documento d'identità per i biglietti nominativi.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Colosseo",
-        link: { label: "📖 Guida Ufficiale", url: "https://colosseo.it" }
-      },
-      { 
-        time: "21:00", 
-        title: "Cena al Dar Bruttone", 
-        location: "Rione Monti", 
-        notes: "Tradizionale osteria romana a Rione Monti. Specialità: Carbonara, Amatriciana, Coda alla vaccinara. Prenotazione già confermata.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Dar+Bruttone+Roma",
-        link: { label: "🍽️ Menù e Info", url: "http://www.darbruttonerionemonti.com" }
-      },
-      { 
-        time: "Sera", 
-        title: "Fontana di Trevi", 
-        location: "Fontana di Trevi", 
-        notes: "Passeggiata serale alla fontana. Forse dopo cena non si paga l'ingresso. Buttate una monetina: secondo la leggenda garantisce il ritorno a Roma!",
-        maps: "https://www.google.com/maps/search/?api=1&query=Fontana+di+Trevi",
-        link: { label: "📖 Storia & Info", url: "https://www.turismoroma.it/it/luoghi/fontana-di-trevi" }
+      {
+        time: "20:30",
+        title: "Cena Tipica Maremmana",
+        location: "Trattoria locale a Manciano / Montemerano",
+        notes: "Cena in trattoria locale per assaporare le specialità maremmane: cinghiale in umido, acquacotta, tortelli maremmani e pici!",
+        maps: "https://www.google.com/maps/search/?api=1&query=Trattoria+Maremmana+Manciano"
       }
     ]
   },
   {
-    day: "Venerdì 3 Luglio 2026",
+    dayIndex: 1,
+    day: "12 Agosto 2026",
+    title: "Giornata Marina all'Argentario",
+    highlight: "Mare, calette mozzafiato, pasta fredda e bruschettata serale",
     events: [
-      { 
-        time: "08:30", 
-        title: "Colazione", 
-        location: "Roma", 
-        notes: "Carica per la giornata vaticana.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Colazione+Roma+Prati"
+      {
+        time: "08:30",
+        title: "Colazione & Preparazione Pranzo al Sacco",
+        location: "Poderi Di Montemerano",
+        notes: "Colazione in struttura e preparazione borse frigo e pasta fredda per il mare.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
       },
-      { 
-        time: "10:00", 
-        title: "Basilica di San Pietro", 
-        location: "Piazza San Pietro", 
-        notes: "Visita prenotata! La basilica più grande del mondo, costruita sul luogo del martirio di San Pietro. Da non perdere: la Pietà di Michelangelo (1499), la cupola e il colonnato del Bernini. Abbigliamento decoroso obbligatorio (spalle e ginocchia coperte).",
-        maps: "https://www.google.com/maps/search/?api=1&query=Basilica+di+San+Pietro",
-        link: { label: "📖 Sito Ufficiale", url: "https://www.basilicasanpietro.va" }
+      {
+        time: "09:30",
+        title: "Partenza per l'Argentario & Costa Maremmana",
+        location: "Monte Argentario & Litorale",
+        notes: "Circa 45-60 min di strada panoramica per raggiungere il litorale. Selezione tra le spiagge migliori!",
+        maps: "https://www.google.com/maps/search/?api=1&query=Monte+Argentario",
+        options: [
+          { name: "Cala del Gesso", dist: "1 ora", desc: "Cala rocciosa e pittoresca, splendida per snorkeling. Richiede un sentiero in pendenza.", maps: "https://www.google.com/maps/search/?api=1&query=Cala+del+Gesso" },
+          { name: "Spiaggia della Feniglia", dist: "1 ora", desc: "Lunga spiaggia di sabbia libera immersa nella pineta e riserva naturale. Molto rilassante.", maps: "https://www.google.com/maps/search/?api=1&query=Spiaggia+della+Feniglia" },
+          { name: "Spiaggia OSA", dist: "47 min", desc: "Sabbiosa, più vicina rispetto all'Argentario. Molto agevole per relax immediato.", maps: "https://www.google.com/maps/search/?api=1&query=Spiaggia+OSA+Fonteblanda" },
+          { name: "Spiaggia La Giannella", dist: "42 min", desc: "Litorale di sabbia comodo, con tratti liberi e servizi/stabilimenti.", maps: "https://www.google.com/maps/search/?api=1&query=Spiaggia+La+Giannella" },
+          { name: "Altre cale", dist: "45-60 min", desc: "La Cacciarella, Punta Cala Grande, Spiaggia di San Rocco, Poggio Pertuso.", maps: "https://www.google.com/maps/search/?api=1&query=Porto+Santo+Stefano" }
+        ]
       },
-      { 
-        time: "13:00", 
-        title: "Circo Massimo & Giardino degli Aranci", 
-        location: "Aventino", 
-        notes: "Il Circo Massimo era il più grande stadio dell'antichità (300.000 spettatori). Il Giardino degli Aranci sull'Aventino offre la migliore vista panoramica di Roma e il famoso 'buco della serratura' del Priorato di Malta, dove si vede la cupola di San Pietro perfettamente inquadrata.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Giardino+degli+Aranci",
-        link: { label: "ℹ️ Info Circo Massimo", url: "https://www.turismoroma.it/it/luoghi/circo-massimo" }
+      {
+        time: "13:00",
+        title: "Pranzo in Spiaggia",
+        location: "Sotto l'ombrellone / Pineta",
+        notes: "Pranzo al sacco con la pasta fredda preparata al mattino, frutta fresca e drink freschi dalle borse frigo.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Monte+Argentario"
       },
-      { 
-        time: "16:00", 
-        title: "Catacombe (Prenotato)", 
-        location: "Via Appia Antica", 
-        notes: "Visita guidata prenotata. Dalila è a lezione fino alle 18:30. Le catacombe sono una rete di gallerie sotterranee usate dai primi cristiani come cimitero. Temperature interne attorno ai 15°C — portate una felpa!",
-        maps: "https://www.google.com/maps/search/?api=1&query=Catacombe+Roma+Via+Appia",
-        link: { label: "📖 Sito Catacombe", url: "https://www.catacombesancallisto.it" }
+      {
+        time: "18:00",
+        title: "Rientro in Struttura & Docce",
+        location: "Poderi Di Montemerano",
+        notes: "Rientro a casa, doccia rigenerante e momento aperitivo in giardino/piscina.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
       },
-      { 
-        time: "19:00", 
-        title: "Isola Tiberina", 
-        location: "Tevere", 
-        notes: "L'unica isola fluviale di Roma, collegata al Trastevere e al Ghetto Ebraico da ponti antichissimi. Bella per una passeggiata serale nelle piazze vicine.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Isola+Tiberina",
-        link: { label: "ℹ️ Scopri di Più", url: "https://www.turismoroma.it/it/luoghi/isola-tiberina" }
-      },
-      { 
-        time: "Cena", 
-        title: "Cena: Come 'na Vorta", 
-        location: "Trastevere / Centro", 
-        notes: "Cucina romana con pasta fresca fatta in casa. Scegli il formato (fettuccine, gnocchi, ravioli…) e il condimento (Carbonara, Cacio e Pepe, Amatriciana). Alternative: Osteria il Matto o Vino Bono.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Come+'na+Vorta+Pasta+E+Vino+Roma",
-        link: { label: "🍽️ Menù e Sedi", url: "https://www.comenavorta.it" }
+      {
+        time: "20:30",
+        title: "Cena a Casa: Bruschettata!",
+        location: "Poderi Di Montemerano",
+        notes: "Cena conviviale all'aperto a casa con super bruschette miste (pomodoro, olio locale, affettati, formaggi), musica e giochi di società.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
       }
     ]
   },
   {
-    day: "Sabato 4 Luglio 2026",
+    dayIndex: 2,
+    day: "13 Agosto 2026",
+    title: "Relax, Piscina, Terme & Super Grigliata",
+    highlight: "Giornata di puro relax, bagni in piscina e grigliata serale al BBQ",
     events: [
-      { 
-        time: "08:30", 
-        title: "Colazione", 
-        location: "Roma", 
-        notes: "Ultima mattina libera prima del tour del centro.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Colazione+Roma"
+      {
+        time: "09:00",
+        title: "Mattinata Mare (Opzionale) o Relax a Casa",
+        location: "Struttura o Spiaggia Vicina",
+        notes: "Scelta libera: puntata rapida al mare oppure colazione senza fretta in veranda.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
       },
-      { 
-        time: "09:30", 
-        title: "Piazza di Spagna & Pincio", 
-        location: "Piazza di Spagna", 
-        notes: "La scalinata di Trinità dei Monti (135 gradini, 1725) è uno dei luoghi più fotografati di Roma. Salite fino alla terrazza del Pincio per una vista panoramica con vista su Piazza del Popolo. Dalila è a lezione.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Piazza+di+Spagna",
-        link: { label: "ℹ️ Guida Turistica", url: "https://www.turismoroma.it/it/luoghi/piazza-di-spagna" }
+      {
+        time: "11:30",
+        title: "Piscina & Solarium ai Poderi",
+        location: "Piscina Poderi Di Montemerano",
+        notes: "Permanenza in piscina, lettini, sole, musica con la cassa di Bass e totale tranquillità.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
       },
-      { 
-        time: "12:00", 
-        title: "Pranzo veloce", 
-        location: "Zona Prati/Vaticano", 
-        notes: "Snack prima dei musei.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Pranzo+Prati+Roma"
+      {
+        time: "16:30",
+        title: "Sosta alle Terme Naturali",
+        location: "Cascate del Mulino / Saturnia",
+        notes: "Famosissime terme naturali ad accesso totalmente gratuito nei pressi di Montemerano! Acque termali sulfuree calde.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Cascate+del+Mulino+Saturnia",
+        link: { label: "♨️ Info Terme di Saturnia", url: "https://www.cascate-del-mulino.it" }
       },
-      { 
-        time: "13:00", 
-        title: "Musei Vaticani & Cappella Sistina", 
-        location: "Musei Vaticani", 
-        notes: "I Musei Vaticani contengono una delle più grandi collezioni d'arte al mondo. La Cappella Sistina (affrescata da Michelangelo 1508-1512) è inclusa nel biglietto. Attenzione: il sabato può essere molto affollato — senza prenotazione possono esserci attese. Silenzio e niente foto con flash nella Cappella.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Musei+Vaticani",
-        link: { label: "🎟️ Biglietti Ufficiali", url: "https://tickets.museivaticani.va" }
+      {
+        time: "19:00",
+        title: "Preparazione Grigliata BBQ",
+        location: "Area Barbecue Poderi Di Montemerano",
+        notes: "Accensione carbonella, preparazione delle carni e verdure locali acquistate durante il giorno.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
       },
-      { 
-        time: "17:00", 
-        title: "Gianicolo", 
-        location: "Passeggiata del Gianicolo", 
-        notes: "Uno dei colli più alti di Roma con una terrazza panoramica mozzafiato sul centro storico. Ogni giorno a mezzogiorno viene sparato un colpo di cannone come tradizione. Ottimo per il tramonto!",
-        maps: "https://www.google.com/maps/search/?api=1&query=Passeggiata+del+Gianicolo",
-        link: { label: "ℹ️ Info Gianicolo", url: "https://www.turismoroma.it/it/luoghi/gianicolo" }
-      },
-      { 
-        time: "20:00", 
-        title: "Cena: Osteria Rugantino", 
-        location: "Trastevere",
-        notes: "Ristorante storico nel cuore di Trastevere, famoso per la cucina romana tradizionale. Atmosfera vivace e tipica del quartiere. Via della Lungaretta 54.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Osteria+Rugantino+Trastevere",
-        link: { label: "🍽️ Menù & Prenotazioni", url: "https://www.anticaosteriarugantino.it" }
+      {
+        time: "20:30",
+        title: "Maxi Grigliata & Festa di Chiusura",
+        location: "Giardino Struttura",
+        notes: "Cena sociale all'aperto, grigliata, brindisi, giochi con carte / Quickstop e pistole d'acqua di Dave!",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
       }
     ]
   },
   {
-    day: "Domenica 5 Luglio 2026",
+    dayIndex: 3,
+    day: "14 Agosto 2026",
+    title: "Check-out & Rientro",
+    highlight: "Colazione, saluti alla Maremma e viaggio di rientro",
     events: [
-      { 
-        time: "08:30", 
-        title: "Colazione", 
-        location: "Centro", 
-        notes: "Ultima colazione romana — godetevela!",
-        maps: "https://www.google.com/maps/search/?api=1&query=Colazione+Roma+Centro"
+      {
+        time: "08:30",
+        title: "Prima Colazione & Sistemazione Valigie",
+        location: "Poderi Di Montemerano",
+        notes: "Ultima colazione in Maremma, chiusura bagagli e pulizia sommaria.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
       },
-      { 
-        time: "09:30", 
-        title: "Piazza Navona", 
-        location: "Piazza Navona", 
-        notes: "Una delle piazze più belle di Roma, costruita sullo stadio di Domiziano (86 d.C.). Al centro si trova la Fontana dei Quattro Fiumi del Bernini. Nei dintorni anche il Pantheon e Campo dei Fiori.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Piazza+Navona",
-        link: { label: "ℹ️ Guida Piazza Navona", url: "https://www.turismoroma.it/it/luoghi/piazza-navona" }
+      {
+        time: "08:00 - 11:00",
+        title: "Check-out ufficiale dalla Struttura",
+        location: "Poderi Di Montemerano",
+        notes: "Consegna chiavi ed espletamento delle procedure di partenza (entro le ore 11:00).",
+        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
       },
-      { 
-        time: "09:30", 
-        title: "Pantheon", 
-        location: "Pantheon", 
-        notes: "Il tempio romano meglio conservato al mondo, costruito da Adriano nel 125 d.C. La cupola con il suo 'oculus' (apertura di 9m) è ancora oggi la più grande cupola non rinforzata del mondo. Ingresso a pagamento (7€). Orari: 9:00-19:00.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Pantheon+Roma",
-        link: { label: "🎟️ Biglietti Ufficiali", url: "https://portale.museiitaliani.it" }
+      {
+        time: "11:30",
+        title: "Partenza Viaggio di Rientro",
+        location: "In viaggio verso casa",
+        notes: "Partenza in auto (stimata tra le 11:00 e le 12:00). Tempo di percorrenza stimato: 5 ore e mezza / 6 ore.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Parcheggio+Martini"
       },
-      { 
-        time: "09:30", 
-        title: "Campo dei Fiori", 
-        location: "Campo dei Fiori", 
-        notes: "Vivace piazza nel centro storico. La domenica mattina c'è il mercato. Al centro la statua di Giordano Bruno, bruciato vivo qui nel 1600. Ottimo posto per uno spuntino o un gelato.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Campo+dei+Fiori+Roma",
-        link: { label: "ℹ️ Info Campo dei Fiori", url: "https://www.turismoroma.it/it/luoghi/campo-de-fiori" }
+      {
+        time: "13:30",
+        title: "Sosta Pranzo di Rientro",
+        location: "Autostrada / Ristorante lungo il tragitto",
+        notes: "Pausa pranzo rilassante a metà percorso per spezzare il viaggio di rientro.",
+        maps: "https://www.google.com/maps/search/?api=1&query=Autogrill"
       },
-      { 
-        time: "12:00", 
-        title: "Pranzo", 
-        location: "Centro Storico", 
-        notes: "Ultimo pasto a Roma — da scegliere sul momento!",
-        maps: "https://www.google.com/maps/search/?api=1&query=Ristorante+Centro+Storico+Roma"
-      },
-      { 
-        time: "13:00", 
-        title: "Verso Termini", 
-        location: "Roma Termini", 
-        notes: "Rientro in stazione, ritiro valigie e partenza.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Roma+Termini"
-      },
-      { 
-        time: "16:35", 
-        title: "Treno di Ritorno", 
-        location: "Roma Termini", 
-        notes: "Arrivo a Padova alle 20:04. Possibile coincidenza per Castelfranco alle 20:07, altrimenti si aspetta 1 ora il treno successivo.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Roma+Termini",
-        link: { label: "🚄 Trenitalia", url: "https://www.trenitalia.com" }
+      {
+        time: "17:30 / 18:00",
+        title: "Arrivo a Destinazione",
+        location: "Parcheggio Martini",
+        notes: "Arrivo previsto a casa, scarico bagagli e saluti finali del Ritiro Estivo Toscana 2026! 🍷",
+        maps: "https://www.google.com/maps/search/?api=1&query=Parcheggio+Martini"
       }
     ]
   }
