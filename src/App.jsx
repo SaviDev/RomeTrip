@@ -133,21 +133,21 @@ function App() {
   const totalCheckedSlots = checklist.reduce((acc, i) => acc + (i.checkedBy ? i.checkedBy.length : 0), 0)
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-[#1E2923] flex flex-col items-center">
+    <div className="min-h-screen bg-[#FDFBF7] text-[#1E2923] flex flex-col items-center max-w-full overflow-x-hidden">
 
       {/* Top Banner & Header */}
       <header className="w-full bg-[#1E2923] text-white shadow-xl relative overflow-hidden">
         {/* Decorative background image overlay */}
         <div className="absolute inset-0 opacity-25 bg-cover bg-center" style={{ backgroundImage: `url('/tuscany_hero.png')` }} />
 
-        <div className="relative max-w-4xl mx-auto px-5 py-5 flex items-center justify-between">
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-5 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-3xl filter drop-shadow">🍷</span>
+            <span className="text-2xl sm:text-3xl filter drop-shadow">🍷</span>
             <div>
-              <h1 className="text-xl sm:text-2xl font-black tracking-tight text-[#E5A93C] uppercase">
+              <h1 className="text-lg sm:text-2xl font-black tracking-tight text-[#E5A93C] uppercase">
                 Toscana 2026
               </h1>
-              <p className="text-xs sm:text-sm font-semibold text-amber-100/90 tracking-wide">
+              <p className="text-[11px] sm:text-sm font-semibold text-amber-100/90 tracking-wide">
                 Ritiro Estivo in Maremma • 11 - 14 Agosto
               </p>
             </div>
@@ -181,7 +181,7 @@ function App() {
 
         {/* Header Navigation Dropdown */}
         {menuOpen && (
-          <div className="relative z-50 bg-[#27342D] border-t border-amber-500/20 shadow-2xl px-5 py-4 animate-fadeIn">
+          <div className="relative z-50 bg-[#27342D] border-t border-amber-500/20 shadow-2xl px-4 sm:px-5 py-4 animate-fadeIn">
             <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-5 gap-2">
               <button
                 onClick={() => { setActiveTab('programma'); setMenuOpen(false); }}
@@ -246,12 +246,12 @@ function App() {
         )}
       </header>
 
-      {/* Main Navigation Bar */}
-      <nav className="w-full bg-[#5B7043] text-white shadow-md sticky top-0 z-40">
-        <div className="max-w-4xl mx-auto px-4 flex justify-around sm:justify-center sm:gap-6 py-2">
+      {/* Main Navigation Bar - Scrollable on small screens */}
+      <nav className="w-full bg-[#5B7043] text-white shadow-md sticky top-0 z-40 overflow-x-auto no-scrollbar">
+        <div className="max-w-4xl mx-auto px-2 sm:px-4 flex justify-start sm:justify-center items-center gap-1 sm:gap-6 py-2 overflow-x-auto no-scrollbar min-w-0">
           <button
             onClick={() => setActiveTab('programma')}
-            className={`px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 transition-all ${
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-extrabold text-[11px] sm:text-xs flex items-center gap-1 shrink-0 transition-all ${
               activeTab === 'programma' ? 'bg-[#E5A93C] text-[#1E2923] shadow-md scale-105' : 'hover:bg-white/10 text-white/90'
             }`}
           >
@@ -259,7 +259,7 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab('logistica')}
-            className={`px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 transition-all ${
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-extrabold text-[11px] sm:text-xs flex items-center gap-1 shrink-0 transition-all ${
               activeTab === 'logistica' ? 'bg-[#E5A93C] text-[#1E2923] shadow-md scale-105' : 'hover:bg-white/10 text-white/90'
             }`}
           >
@@ -267,7 +267,7 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab('alloggio')}
-            className={`px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 transition-all ${
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-extrabold text-[11px] sm:text-xs flex items-center gap-1 shrink-0 transition-all ${
               activeTab === 'alloggio' ? 'bg-[#E5A93C] text-[#1E2923] shadow-md scale-105' : 'hover:bg-white/10 text-white/90'
             }`}
           >
@@ -275,7 +275,7 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab('costi')}
-            className={`px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 transition-all ${
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-extrabold text-[11px] sm:text-xs flex items-center gap-1 shrink-0 transition-all ${
               activeTab === 'costi' ? 'bg-[#E5A93C] text-[#1E2923] shadow-md scale-105' : 'hover:bg-white/10 text-white/90'
             }`}
           >
@@ -283,7 +283,7 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab('checklist')}
-            className={`px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 transition-all ${
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-extrabold text-[11px] sm:text-xs flex items-center gap-1 shrink-0 transition-all ${
               activeTab === 'checklist' ? 'bg-[#E5A93C] text-[#1E2923] shadow-md scale-105' : 'hover:bg-white/10 text-white/90'
             }`}
           >
@@ -293,7 +293,7 @@ function App() {
       </nav>
 
       {/* Main Container */}
-      <main className="w-full max-w-4xl p-4 sm:p-6 flex-grow">
+      <main className="w-full max-w-4xl p-3 sm:p-6 flex-grow overflow-x-hidden min-w-0">
 
         {/* TAB 1: PROGRAMMA DEL GIORNO */}
         {activeTab === 'programma' && (
@@ -322,7 +322,7 @@ function App() {
             </div>
 
             {/* Day Card Details */}
-            <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-xl border border-amber-200/50 relative overflow-hidden">
+            <div className="bg-white rounded-3xl p-4 sm:p-7 shadow-xl border border-amber-200/50 relative overflow-hidden">
               {/* Day Badge Header */}
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b-2 border-[#E5A93C] pb-4 mb-6">
                 <div>
@@ -366,10 +366,10 @@ function App() {
                     <div className="hidden sm:block absolute left-[74px] top-2.5 w-3 h-3 rounded-full bg-[#C85A32] ring-4 ring-white shadow" />
 
                     {/* Event Content Box */}
-                    <div className="flex-grow bg-stone-50/80 rounded-2xl p-4 border border-stone-200/70 hover:border-amber-400 transition-all hover:shadow-md">
+                    <div className="flex-grow bg-stone-50/80 rounded-2xl p-4 border border-stone-200/70 hover:border-amber-400 transition-all hover:shadow-md min-w-0">
                       <div className="flex justify-between items-start gap-2">
-                        <div>
-                          <h3 className="font-black text-base text-[#1E2923] group-hover:text-[#C85A32] transition-colors">
+                        <div className="min-w-0">
+                          <h3 className="font-black text-base text-[#1E2923] group-hover:text-[#C85A32] transition-colors break-words">
                             {event.title}
                           </h3>
                           <p className="text-xs font-bold text-stone-400 uppercase tracking-wide mt-0.5 flex items-center gap-1">
@@ -456,7 +456,7 @@ function App() {
           <div className="animate-fadeIn space-y-6">
 
             {/* Travel Summary Header */}
-            <div className="bg-white rounded-3xl p-6 shadow-xl border border-amber-200/50">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 shadow-xl border border-amber-200/50">
               <h2 className="text-xl font-black text-[#1E2923] flex items-center gap-2 mb-2">
                 <span>🚗</span> Logistica Trasporti & Viaggio
               </h2>
@@ -496,7 +496,7 @@ function App() {
             </div>
 
             {/* Cars List */}
-            <div className="bg-white rounded-3xl p-6 shadow-xl border border-amber-200/50">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 shadow-xl border border-amber-200/50">
               <h3 className="text-lg font-black text-[#1E2923] mb-4 flex items-center gap-2">
                 <span>🚘</span> Parco Auto (3 Autovetture)
               </h3>
@@ -524,7 +524,7 @@ function App() {
         {/* TAB 3: ALLOGGIO */}
         {activeTab === 'alloggio' && (
           <div className="animate-fadeIn space-y-6">
-            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-amber-200/50">
+            <div className="bg-white rounded-3xl p-4 sm:p-8 shadow-xl border border-amber-200/50">
               
               <div className="relative rounded-2xl overflow-hidden mb-6 h-48 sm:h-64 bg-stone-900 shadow-md">
                 <img
@@ -582,7 +582,7 @@ function App() {
           <div className="animate-fadeIn space-y-6">
 
             {/* Total Highlight */}
-            <div className="bg-[#1E2923] text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+            <div className="bg-[#1E2923] text-white rounded-3xl p-5 sm:p-8 shadow-xl relative overflow-hidden">
               <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
                   <span className="text-xs font-black uppercase tracking-widest text-[#E5A93C]">Stima Costo Totale a Persona</span>
@@ -619,7 +619,7 @@ function App() {
             </div>
 
             {/* Shared Expenses Table */}
-            <div className="bg-white rounded-3xl p-6 shadow-xl border border-amber-200/50">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 shadow-xl border border-amber-200/50">
               <h3 className="text-lg font-black text-[#1E2923] mb-3 flex items-center gap-2">
                 <span>📋</span> Spese Generali Condivise
               </h3>
@@ -654,7 +654,7 @@ function App() {
             </div>
 
             {/* Daily Expenses Breakdown */}
-            <div className="bg-white rounded-3xl p-6 shadow-xl border border-amber-200/50">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 shadow-xl border border-amber-200/50">
               <h3 className="text-lg font-black text-[#1E2923] mb-4 flex items-center gap-2">
                 <span>📆</span> Stima Spese Giornaliere a Persona
               </h3>
@@ -687,39 +687,39 @@ function App() {
         {activeTab === 'checklist' && (
           <div className="animate-fadeIn space-y-6">
 
-            <div className="bg-[#white] rounded-3xl p-6 shadow-xl border border-amber-200/50">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 shadow-xl border border-amber-200/50 overflow-hidden min-w-0">
 
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
-                <div>
-                  <h2 className="text-xl font-black text-[#1E2923] flex items-center gap-2">
-                    <span>🎒</span> Checklist Cose da Portare ({checklist.length} oggetti)
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 min-w-0">
+                <div className="min-w-0">
+                  <h2 className="text-lg sm:text-xl font-black text-[#1E2923] flex items-center gap-2 break-words">
+                    <span>🎒</span> Checklist Cose da Portare ({checklist.length})
                   </h2>
-                  <p className="text-xs text-stone-500 font-medium mt-0.5">
+                  <p className="text-xs text-stone-500 font-medium mt-0.5 leading-tight">
                     Clicca sul tuo nome per spuntare se hai preso l'oggetto! ({totalCheckedSlots} di {totalAssignedSlots} spunte completate)
                   </p>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 self-end sm:self-auto">
+                <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-start sm:justify-end">
                   <button
                     onClick={() => setShowAddForm(!showAddForm)}
-                    className="px-3 py-1.5 bg-[#5B7043] text-white rounded-xl text-xs font-bold shadow hover:bg-[#495b35] transition-all flex items-center gap-1"
+                    className="px-3 py-1.5 bg-[#5B7043] text-white rounded-xl text-xs font-bold shadow hover:bg-[#495b35] transition-all flex items-center gap-1 shrink-0"
                   >
                     <span>➕</span> Nuovo Oggetto
                   </button>
 
                   <button
                     onClick={restoreDefaultChecklist}
-                    className="px-3 py-1.5 bg-amber-100 border border-amber-300 text-amber-900 hover:bg-amber-200 rounded-xl text-xs font-bold transition-all flex items-center gap-1"
+                    className="px-3 py-1.5 bg-amber-100 border border-amber-300 text-amber-900 hover:bg-amber-200 rounded-xl text-xs font-bold transition-all flex items-center gap-1 shrink-0"
                     title="Ripristina i 19 oggetti originali se ne hai eliminati per sbaglio"
                   >
-                    <span>🔄</span> Ripristina Lista Iniziale
+                    <span>🔄</span> Ripristina Lista
                   </button>
                 </div>
               </div>
 
               {/* Add New Item Form */}
               {showAddForm && (
-                <form onSubmit={handleAddItem} className="bg-amber-50/80 p-4 rounded-2xl border border-amber-200 mb-6 space-y-3 animate-fadeIn">
+                <form onSubmit={handleAddItem} className="bg-amber-50/80 p-3 sm:p-4 rounded-2xl border border-amber-200 mb-6 space-y-3 animate-fadeIn">
                   <h4 className="text-xs font-black uppercase text-amber-900 tracking-wider">Aggiungi nuovo oggetto alla lista:</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <input
@@ -790,7 +790,7 @@ function App() {
               </div>
 
               {/* Filters (Category + Person) */}
-              <div className="space-y-3 mb-6 bg-stone-50 p-4 rounded-2xl border border-stone-200">
+              <div className="space-y-3 mb-6 bg-stone-50 p-3 sm:p-4 rounded-2xl border border-stone-200 overflow-hidden">
                 {/* Person Filter */}
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-widest text-stone-400 block mb-1.5">
@@ -852,20 +852,20 @@ function App() {
                   return (
                     <div
                       key={item.id}
-                      className={`p-4 rounded-2xl border transition-all ${
+                      className={`p-3.5 sm:p-4 rounded-2xl border transition-all min-w-0 ${
                         isFullyComplete
                           ? 'bg-emerald-50/70 border-emerald-200 shadow-sm'
                           : 'bg-white border-stone-200 hover:border-amber-300 shadow-sm'
                       }`}
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-2 mb-3">
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className={`font-black text-sm ${isFullyComplete ? 'line-through text-emerald-900' : 'text-[#1E2923]'}`}>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className={`font-black text-sm break-words ${isFullyComplete ? 'line-through text-emerald-900' : 'text-[#1E2923]'}`}>
                               {item.item}
                             </span>
                             {isFullyComplete && (
-                              <span className="text-[10px] font-black bg-emerald-600 text-white px-2 py-0.5 rounded-full uppercase tracking-wider">
+                              <span className="text-[10px] font-black bg-emerald-600 text-white px-2 py-0.5 rounded-full uppercase tracking-wider shrink-0">
                                 ✓ TUTTI PRONTI!
                               </span>
                             )}
@@ -876,7 +876,7 @@ function App() {
                         </div>
 
                         {/* Progress counter pill & Actions */}
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
                           <span className="text-[11px] font-mono font-bold text-stone-500 bg-stone-100 px-2 py-0.5 rounded-lg">
                             {checkedList.length} / {assignedList.length} pronti
                           </span>
