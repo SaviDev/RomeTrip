@@ -41,7 +41,7 @@ function App() {
   const [newItemCategory, setNewItemCategory] = useState('Casa / Cucina')
   const [showAddForm, setShowAddForm] = useState(false)
 
-  // Edit item assigned people modal/inline state
+  // Edit item assigned people inline state
   const [editingItemId, setEditingItemId] = useState(null)
 
   // Save checklist to localStorage
@@ -108,6 +108,10 @@ function App() {
     setShowAddForm(false)
   }
 
+  const deleteItem = (id) => {
+    setChecklist(prev => prev.filter(item => item.id !== id))
+  }
+
   const resetChecklist = () => {
     setChecklist(checklistData.map(item => ({ ...item, checkedBy: [] })))
   }
@@ -120,7 +124,7 @@ function App() {
     return matchesCategory && matchesPerson
   })
 
-  // Calculate overall total completed items (fully completed by all assigned people)
+  // Calculate overall total completed items
   const totalAssignedSlots = checklist.reduce((acc, i) => acc + (i.assignedTo ? i.assignedTo.length : 0), 0)
   const totalCheckedSlots = checklist.reduce((acc, i) => acc + (i.checkedBy ? i.checkedBy.length : 0), 0)
 
@@ -866,7 +870,7 @@ function App() {
                           </span>
                         </div>
 
-                        {/* Progress counter pill */}
+                        {/* Progress counter pill & Actions */}
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-mono font-bold text-stone-500 bg-stone-100 px-2 py-0.5 rounded-lg">
                             {checkedList.length} / {assignedList.length} pronti
@@ -877,7 +881,16 @@ function App() {
                             onClick={() => setEditingItemId(editingItemId === item.id ? null : item.id)}
                             className="text-[10px] font-bold text-stone-400 hover:text-[#C85A32] underline"
                           >
-                            {editingItemId === item.id ? "Chiudi" : "✏️ Modifica chi la porta"}
+                            {editingItemId === item.id ? "Chiudi" : "✏️ Chi la porta"}
+                          </button>
+
+                          {/* Delete Item Button */}
+                          <button
+                            onClick={() => deleteItem(item.id)}
+                            className="text-stone-300 hover:text-red-600 p-1 transition-colors text-xs font-bold"
+                            title="Elimina oggetto"
+                          >
+                            🗑️
                           </button>
                         </div>
                       </div>
@@ -954,7 +967,7 @@ function App() {
 
       {/* Footer Banner */}
       <footer className="w-full bg-[#1E2923] text-white py-6 px-4 border-t border-amber-500/20 text-center text-xs">
-        <p className="font-bold text-amber-200">🍷 TOSCANA 2026 • Ritiro Estivo in Maremma 🌾</p>
+        <p className="font-[#E5A93C] font-bold text-amber-200">🍷 TOSCANA 2026 • Ritiro Estivo in Maremma 🌾</p>
         <p className="text-stone-400 text-[11px] mt-1 font-medium">Poderi Di Montemerano • 11 - 14 Agosto 2026</p>
       </footer>
 
