@@ -114,8 +114,8 @@ function App() {
     }
   }
 
-  const resetChecklist = () => {
-    if (window.confirm("Vuoi deselezionare tutte le spunte della checklist?")) {
+  const restoreDefaultChecklist = () => {
+    if (window.confirm("Vuoi ripristinare tutti i 19 oggetti originali della lista?")) {
       setChecklist(checklistData.map(item => ({ ...item, checkedBy: [] })))
     }
   }
@@ -687,19 +687,19 @@ function App() {
         {activeTab === 'checklist' && (
           <div className="animate-fadeIn space-y-6">
 
-            <div className="bg-white rounded-3xl p-6 shadow-xl border border-amber-200/50">
+            <div className="bg-[#white] rounded-3xl p-6 shadow-xl border border-amber-200/50">
 
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
                 <div>
                   <h2 className="text-xl font-black text-[#1E2923] flex items-center gap-2">
-                    <span>🎒</span> Checklist Cose da Portare
+                    <span>🎒</span> Checklist Cose da Portare ({checklist.length} oggetti)
                   </h2>
                   <p className="text-xs text-stone-500 font-medium mt-0.5">
                     Clicca sul tuo nome per spuntare se hai preso l'oggetto! ({totalCheckedSlots} di {totalAssignedSlots} spunte completate)
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 self-end sm:self-auto">
+                <div className="flex flex-wrap items-center gap-2 self-end sm:self-auto">
                   <button
                     onClick={() => setShowAddForm(!showAddForm)}
                     className="px-3 py-1.5 bg-[#5B7043] text-white rounded-xl text-xs font-bold shadow hover:bg-[#495b35] transition-all flex items-center gap-1"
@@ -708,10 +708,11 @@ function App() {
                   </button>
 
                   <button
-                    onClick={resetChecklist}
-                    className="text-xs font-bold text-red-600 hover:text-red-800 underline ml-2"
+                    onClick={restoreDefaultChecklist}
+                    className="px-3 py-1.5 bg-amber-100 border border-amber-300 text-amber-900 hover:bg-amber-200 rounded-xl text-xs font-bold transition-all flex items-center gap-1"
+                    title="Ripristina i 19 oggetti originali se ne hai eliminati per sbaglio"
                   >
-                    Deseleziona Tutti
+                    <span>🔄</span> Ripristina Lista Iniziale
                   </button>
                 </div>
               </div>
