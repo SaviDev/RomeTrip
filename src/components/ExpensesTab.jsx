@@ -17,6 +17,7 @@ const CATEGORIES = [
   "🍽️ Ristorante / Bar",
   "🏠 Alloggio / Struttura",
   "🎟️ Attività / Ticket",
+  "💸 Rimborso / Pareggio",
   "📦 Altro"
 ]
 
@@ -166,6 +167,22 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
   const handleRestoreDefaults = () => {
     if (window.confirm("Vuoi ripristinare le spese di esempio iniziali?")) {
       setExpenses(INITIAL_EXPENSES)
+    }
+  }
+
+  // Handle settling a debt transfer between two participants
+  const handleSettleTransfer = (from, to, amt) => {
+    if (window.confirm(`Vuoi registrare il rimborso di € ${amt.toFixed(2)} da ${from} a ${to} come completato e consolidato?`)) {
+      const settlementExpense = {
+        id: 'exp-' + Date.now(),
+        title: `Rimborso effettuato: ${from} ➔ ${to}`,
+        amount: amt,
+        payer: from,
+        involved: [to],
+        category: '💸 Rimborso / Pareggio',
+        date: new Date().toISOString().split('T')[0]
+      }
+      setExpenses(prev => [settlementExpense, ...prev])
     }
   }
 
@@ -820,45 +837,91 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
               <p className="text-xs text-emerald-700 mt-1">Nessuno deve dare o ricevere denaro.</p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-4">
+
+              {/* Person Filter for Settlements */}
+              <div className="bg-stone-50 p-3 rounded-2xl border border-stone-200">
+                <span className="text-[10px] font-black uppercase tracking-widest text-stone-500 block mb-1.5">
+                  👤 Filtra rimborsi per persona:
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  <button
+                    onClick={() => setSelectedPerson('tutti')}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                      selectedPerson === 'tutti'
+                        ? 'bg-[#1E2923] text-white shadow'
+                        : 'bg-white text-stone-600 hover:bg-stone-100 border border-stone-200'
+                    }`}
+                  >
+                    Tutti ({settlements.length})
+                  </button>
+                  {participants.map(p => (
+                    <button
+                      key={p}
+                      onClick={() => setSelectedPerson(p)}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                        selectedPerson === p
+                          ? 'bg-[#C85A32] text-white shadow'
+                          : 'bg-white text-stone-600 hover:bg-stone-100 border border-stone-200'
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <span className="text-xs font-black uppercase tracking-wider text-stone-400 block">
-                Rimborso consigliato in {settlements.length} {settlements.length === 1 ? 'operazione' : 'operazioni'}:
+                Rimborsi da effettuare ({settlements.filter(s => selectedPerson === 'tutti' || s.from === selectedPerson || s.to === selectedPerson).length}):
               </span>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {settlements.map((s, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 rounded-2xl bg-gradient-to-r from-stone-50 to-amber-50/50 border border-stone-200 shadow-sm flex items-center justify-between gap-3"
-                  >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <div className="w-8 h-8 rounded-full bg-red-100 border border-red-300 text-red-700 flex items-center justify-center font-black text-xs shrink-0">
-                        🔴
-                      </div>
-                      <div className="min-w-0">
-                        <span className="font-black text-sm text-[#1E2923] block truncate">{s.from}</span>
-                        <span className="text-[10px] text-stone-400 font-bold uppercase">Deve dare a</span>
-                      </div>
-                    </div>
+                {settlements
+                  .filter(s => selectedPerson === 'tutti' || s.from === selectedPerson || s.to === selectedPerson)
+                  .map((s, idx) => (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-2xl bg-gradient-to-r from-stone-50 to-amber-50/50 border border-stone-200 shadow-sm flex flex-col justify-between gap-3"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <div className="w-8 h-8 rounded-full bg-red-100 border border-red-300 text-red-700 flex items-center justify-center font-black text-xs shrink-0">
+                            🔴
+                          </div>
+                          <div className="min-w-0">
+                            <span className="font-black text-sm text-[#1E2923] block truncate">{s.from}</span>
+                            <span className="text-[10px] text-stone-400 font-bold uppercase">Deve dare a</span>
+                          </div>
+                        </div>
 
-                    <div className="text-center shrink-0">
-                      <span className="text-xs font-black text-[#C85A32] bg-white px-2.5 py-1 rounded-xl border border-amber-300 shadow-sm block font-mono">
-                        € {s.amount.toFixed(2)}
-                      </span>
-                      <span className="text-[9px] text-stone-400 font-bold">➔ ➔ ➔</span>
-                    </div>
+                        <div className="text-center shrink-0">
+                          <span className="text-xs font-black text-[#C85A32] bg-white px-2.5 py-1 rounded-xl border border-amber-300 shadow-sm block font-mono">
+                            € {s.amount.toFixed(2)}
+                          </span>
+                          <span className="text-[9px] text-stone-400 font-bold">➔ ➔ ➔</span>
+                        </div>
 
-                    <div className="flex items-center gap-2 min-w-0 justify-end">
-                      <div className="min-w-0 text-right">
-                        <span className="font-black text-sm text-[#1E2923] block truncate">{s.to}</span>
-                        <span className="text-[10px] text-emerald-600 font-bold uppercase">Riceve</span>
+                        <div className="flex items-center gap-2 min-w-0 justify-end">
+                          <div className="min-w-0 text-right">
+                            <span className="font-black text-sm text-[#1E2923] block truncate">{s.to}</span>
+                            <span className="text-[10px] text-emerald-600 font-bold uppercase">Riceve</span>
+                          </div>
+                          <div className="w-8 h-8 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-700 flex items-center justify-center font-black text-xs shrink-0">
+                            🟢
+                          </div>
+                        </div>
                       </div>
-                      <div className="w-8 h-8 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-700 flex items-center justify-center font-black text-xs shrink-0">
-                        🟢
-                      </div>
+
+                      {/* Consolidate / Mark as Settled Button */}
+                      <button
+                        onClick={() => handleSettleTransfer(s.from, s.to, s.amount)}
+                        className="w-full mt-1 py-2 px-3 bg-[#5B7043] hover:bg-[#495b36] text-white text-xs font-black rounded-xl shadow transition-all flex items-center justify-center gap-1.5 active:scale-95 border border-emerald-600/30"
+                      >
+                        <span>✅</span>
+                        <span>Segna come Pagato / Consolidato</span>
+                      </button>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
           )}
