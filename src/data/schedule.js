@@ -21,8 +21,8 @@ export const logisticsData = {
   returnArrivalTime: "17:00 / 18:00 (circa 5h30m - 6h)",
   cars: [
     { id: 1, name: "Auto 1", driver: "Bass", description: "Trasporto gruppo e bagagli" },
-    { id: 2, name: "Auto 2", driver: "Io (Mamma di Bass)", description: "Trasporto gruppo e bagagli" },
-    { id: 3, name: "Auto 3", driver: "Chiara VK", description: "Da definire la composizione equipaggio" }
+    { id: 2, name: "Auto 2", driver: "Io (Luca) / Mamma di Bass", description: "Trasporto gruppo e bagagli" },
+    { id: 3, name: "Auto 3", driver: "Chiara VK", description: "Auto messa a disposizione da Chiara" }
   ]
 };
 
@@ -75,25 +75,32 @@ export const costsData = {
 };
 
 export const checklistData = [
-  { id: 1, item: "Tovaglia", assignedTo: ["Bass"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 1, item: "Tovaglia (Sagra)", assignedTo: ["Bass"], checkedBy: [], category: "Casa / Cucina" },
   { id: 2, item: "Straccio", assignedTo: ["Cla"], checkedBy: [], category: "Casa / Cucina" },
-  { id: 3, item: "Candela decorativa", assignedTo: ["Maddi"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 3, item: "Candela", assignedTo: ["Maddi"], checkedBy: [], category: "Casa / Cucina" },
   { id: 4, item: "Candele per zanzare", assignedTo: ["Da comprare"], checkedBy: [], category: "Spesa comune" },
   { id: 5, item: "Olio d'oliva", assignedTo: ["Da comprare"], checkedBy: [], category: "Spesa comune" },
-  { id: 6, item: "Sale", assignedTo: ["Maddi"], checkedBy: [], category: "Casa / Cucina" },
-  { id: 7, item: "Zucchero", assignedTo: ["Meryland"], checkedBy: [], category: "Casa / Cucina" },
-  { id: 8, item: "Caffè", assignedTo: ["Da comprare"], checkedBy: [], category: "Spesa comune" },
-  { id: 9, item: "Borse Frigo", assignedTo: ["Io (Luca)", "Cla", "Onga", "Maddi", "Chiara"], checkedBy: [], category: "Mare & Viaggio" },
-  { id: 10, item: "Spruzzo Multiuso detergenti", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
-  { id: 11, item: "Spugnetta per piatti", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
-  { id: 12, item: "Detersivo per piatti", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
-  { id: 13, item: "Sacchetti per immondizia", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
-  { id: 14, item: "Moka per il caffè", assignedTo: ["Bass"], checkedBy: [], category: "Casa / Cucina" },
-  { id: 15, item: "Scottex / Carta casa", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
-  { id: 16, item: "Cassa Audio Bluetooth", assignedTo: ["Bass"], checkedBy: [], category: "Svago" },
-  { id: 17, item: "Quickstop / Carte da gioco", assignedTo: ["Meryland", "Dave"], checkedBy: [], category: "Svago" },
-  { id: 18, item: "Pistole d'acqua Dave", assignedTo: ["Dave"], checkedBy: [], category: "Svago" },
-  { id: 19, item: "Schiscette e contenitori cibo", assignedTo: ["Maddi", "Io (Luca)", "Meryland", "Onga"], checkedBy: [], category: "Mare & Viaggio" }
+  { id: 6, item: "Sale fino", assignedTo: ["Meryland"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 7, item: "Sale grosso", assignedTo: ["Maddi"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 8, item: "Zucchero", assignedTo: ["Bass"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 9, item: "Caffè", assignedTo: ["Io (Luca)"], checkedBy: [], category: "Spesa comune" },
+  { id: 10, item: "Borse Frigo", assignedTo: ["Onga", "Maddi", "Chiara", "Meryland"], checkedBy: [], category: "Mare & Viaggio" },
+  { id: 11, item: "Spruzzo Multiuso detergenti", assignedTo: ["Maddi"], checkedBy: [], category: "Pulizia" },
+  { id: 12, item: "Spugnetta per piatti", assignedTo: ["Io (Luca)", "Meryland", "Maddi"], checkedBy: [], category: "Pulizia" },
+  { id: 13, item: "Detersivo per piatti", assignedTo: ["Onga"], checkedBy: [], category: "Pulizia" },
+  { id: 14, item: "Sacchetti per immondizia", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
+  { id: 15, item: "Moka per il caffè", assignedTo: ["Bass"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 16, item: "Scottex / Carta casa", assignedTo: ["Da comprare"], checkedBy: [], category: "Pulizia" },
+  { id: 17, item: "Cassa Audio Bluetooth", assignedTo: ["Bass"], checkedBy: [], category: "Svago" },
+  { id: 18, item: "Quickstop / Carte da gioco / Giochi da tavola", assignedTo: ["Meryland", "Dave"], checkedBy: [], category: "Svago" },
+  { id: 19, item: "Fogli per giochi", assignedTo: ["Dave"], checkedBy: [], category: "Svago" },
+  { id: 20, item: "Pistole d'acqua Dave", assignedTo: ["Dave"], checkedBy: [], category: "Svago" },
+  { id: 21, item: "Schiscette e contenitori cibo", assignedTo: ["Io (Luca)", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga"], checkedBy: [], category: "Mare & Viaggio" },
+  { id: 22, item: "Cavatappi", assignedTo: ["Chiara"], checkedBy: [], category: "Casa / Cucina" },
+  { id: 23, item: "Maschere per snorkeling", assignedTo: ["Chiara"], checkedBy: [], category: "Mare & Viaggio" },
+  { id: 24, item: "Ombrelloni da spiaggia", assignedTo: ["Maddi", "Chiara", "Cla", "Onga"], checkedBy: [], category: "Mare & Viaggio" },
+  { id: 25, item: "Pasta", assignedTo: ["Da comprare"], checkedBy: [], category: "Spesa comune" },
+  { id: 26, item: "Biscotti", assignedTo: ["Da comprare"], checkedBy: [], category: "Spesa comune" }
 ];
 
 export const scheduleData = [

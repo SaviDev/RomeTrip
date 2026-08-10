@@ -125,7 +125,7 @@ function App() {
   }
 
   const restoreDefaultChecklist = () => {
-    if (window.confirm("Vuoi ripristinare tutti i 19 oggetti originali della lista?")) {
+    if (window.confirm("Vuoi ripristinare tutti i 26 oggetti della lista predefinita?")) {
       setChecklist(checklistData.map(item => ({ ...item, checkedBy: [] })))
     }
   }
