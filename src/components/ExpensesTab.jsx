@@ -50,6 +50,7 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
   const {
     items: expenses,
     setItems: setExpenses,
+    removeItems: removeExpenses,
     online: expensesOnline,
   } = useServerSync('expenses', INITIAL_EXPENSES.map(exp => ({
     ...exp,
@@ -146,7 +147,7 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
   // Delete expense
   const handleDelete = (id, expTitle) => {
     if (window.confirm(`Sei sicuro di voler eliminare la spesa "${expTitle}"?`)) {
-      setExpenses(prev => prev.filter(e => e.id !== id))
+      removeExpenses([id])
     }
   }
 
@@ -176,7 +177,7 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
   // Handle restoring / undoing a consolidated settlement
   const handleUndoSettlement = (expId, title) => {
     if (window.confirm(`Vuoi ripristinare il rimborso "${title}" e riportarlo tra le spese da saldare?`)) {
-      setExpenses(prev => prev.filter(e => e.id !== expId))
+      removeExpenses([expId])
     }
   }
 

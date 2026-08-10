@@ -37,6 +37,7 @@ function App() {
   const {
     items: checklist,
     setItems: setChecklist,
+    removeItems: removeChecklistItems,
     online: checklistOnline,
   } = useServerSync('checklist', checklistData.map(normalizeChecklistItem))
   const [checklistFilter, setChecklistFilter] = useState('tutti')
@@ -121,7 +122,7 @@ function App() {
 
   const deleteItem = (id, itemTitle) => {
     if (window.confirm(`Sei sicuro di voler eliminare "${itemTitle}" dalla lista?`)) {
-      setChecklist(prev => prev.filter(item => item.id !== id))
+      removeChecklistItems([id])
     }
   }
 

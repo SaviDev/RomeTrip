@@ -21,7 +21,10 @@ const PORT = process.env.PORT || 4000
 const AUTH_TOKEN = process.env.TOSCANA_TOKEN || 'toscana2026-maremma'
 
 // ---------- Storage su file JSON ----------
-const DEFAULT_DB = { expenses: [], checklist: [] }
+// deletedExpenses/deletedChecklist = tombstones: id delle entità cancellate.
+// Servono per evitare che un altro telefono "ricrei" una spesa eliminata
+// (sync senza tombstones = loop infinito di delete/recreate).
+const DEFAULT_DB = { expenses: [], checklist: [], deletedExpenses: [], deletedChecklist: [] }
 
 async function loadDb() {
   try {
@@ -30,9 +33,11 @@ async function loadDb() {
     return {
       expenses: Array.isArray(parsed.expenses) ? parsed.expenses : [],
       checklist: Array.isArray(parsed.checklist) ? parsed.checklist : [],
+      deletedExpenses: Array.isArray(parsed.deletedExpenses) ? parsed.deletedExpenses : [],
+      deletedChecklist: Array.isArray(parsed.deletedChecklist) ? parsed.deletedChecklist : [],
     }
   } catch {
-    return { ...DEFAULT_DB, expenses: [], checklist: [] }
+    return { ...DEFAULT_DB, expenses: [], checklist: [], deletedExpenses: [], deletedChecklist: [] }
   }
 }
 
@@ -119,14 +124,23 @@ app.put('/api/expenses/:id', async (req, res) => {
   res.json(updated)
 })
 
-// DELETE /api/expenses/:id — elimina UNA spesa
+// DELETE /api/expenses/:id — elimina UNA spesa (registra tombstone)
 app.delete('/api/expenses/:id', async (req, res) => {
   const db = await loadDb()
+  const id = req.params.id
   const before = db.expenses.length
-  db.expenses = db.expenses.filter(e => e.id !== req.params.id)
+  db.expenses = db.expenses.filter(e => e.id !== id)
   if (db.expenses.length === before) return res.status(404).json({ error: 'Spesa non trovata' })
+  // Tombstone: evita che altri telefoni ricreino questa spesa
+  if (!db.deletedExpenses.includes(id)) db.deletedExpenses.push(id)
   await saveDb(db)
   res.json({ status: 'ok' })
+})
+
+// GET /api/expenses/deleted — id delle spese cancellate (tombstones)
+app.get('/api/expenses/deleted', async (_req, res) => {
+  const db = await loadDb()
+  res.json(db.deletedExpenses)
 })
 
 // ---------- CHECKLIST ----------
@@ -159,15 +173,24 @@ app.put('/api/checklist/:id', async (req, res) => {
   res.json(updated)
 })
 
-// DELETE /api/checklist/:id — elimina UN oggetto
+// DELETE /api/checklist/:id — elimina UN oggetto (registra tombstone)
 app.delete('/api/checklist/:id', async (req, res) => {
   const db = await loadDb()
   const id = req.params.id
   const before = db.checklist.length
   db.checklist = db.checklist.filter(c => String(c.id) !== String(id))
   if (db.checklist.length === before) return res.status(404).json({ error: 'Oggetto non trovato' })
+  // Tombstone: evita che altri telefoni ricreino questo oggetto
+  const idStr = String(id)
+  if (!db.deletedChecklist.includes(idStr)) db.deletedChecklist.push(idStr)
   await saveDb(db)
   res.json({ status: 'ok' })
+})
+
+// GET /api/checklist/deleted — id degli oggetti cancellati (tombstones)
+app.get('/api/checklist/deleted', async (_req, res) => {
+  const db = await loadDb()
+  res.json(db.deletedChecklist)
 })
 
 // ---------- Health check ----------
