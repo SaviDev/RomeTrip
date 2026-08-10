@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 const DEFAULT_MEMBERS = [
-  "Io",
+  "Io (Luca)",
   "Bass",
   "Cla",
   "Maddi",
@@ -26,7 +26,7 @@ const INITIAL_EXPENSES = [
     title: 'Caparra Poderi Di Montemerano',
     amount: 300,
     payer: 'Dave',
-    involved: ["Io", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga"],
+    involved: ["Io (Luca)", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga"],
     category: '🏠 Alloggio / Struttura',
     date: '2026-08-01'
   },
@@ -35,7 +35,7 @@ const INITIAL_EXPENSES = [
     title: 'Prima Spesa Conad Albinia (Cibo & Bevande)',
     amount: 120,
     payer: 'Bass',
-    involved: ["Io", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga"],
+    involved: ["Io (Luca)", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga"],
     category: '🛒 Spesa / Cibo',
     date: '2026-08-11'
   }
@@ -50,7 +50,13 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
     if (saved) {
       try {
         const parsed = JSON.parse(saved)
-        if (Array.isArray(parsed) && parsed.length >= 0) return parsed
+        if (Array.isArray(parsed) && parsed.length >= 0) {
+          return parsed.map(exp => ({
+            ...exp,
+            payer: exp.payer === 'Io' ? 'Io (Luca)' : exp.payer,
+            involved: (exp.involved || []).map(p => p === 'Io' ? 'Io (Luca)' : p)
+          }))
+        }
       } catch (e) {
         console.error("Errore caricamento spese:", e)
       }
@@ -63,7 +69,7 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
   const [editingId, setEditingId] = useState(null)
   const [title, setTitle] = useState('')
   const [amount, setAmount] = useState('')
-  const [payer, setPayer] = useState(participants[0] || 'Io')
+  const [payer, setPayer] = useState(participants[0] || 'Io (Luca)')
   const [category, setCategory] = useState(CATEGORIES[0])
   const [involved, setInvolved] = useState(participants)
   const [date, setDate] = useState(() => new Date().toISOString().split('T')[0])
@@ -96,7 +102,7 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
     setEditingId(null)
     setTitle('')
     setAmount('')
-    setPayer(participants[0] || 'Io')
+    setPayer(participants[0] || 'Io (Luca)')
     setCategory(CATEGORIES[0])
     setInvolved(participants)
     setDate(new Date().toISOString().split('T')[0])

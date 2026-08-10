@@ -83,7 +83,7 @@ export const checklistData = [
   { id: 6, item: "Sale", assignedTo: ["Maddi"], checkedBy: [], category: "Casa / Cucina" },
   { id: 7, item: "Zucchero", assignedTo: ["Meryland"], checkedBy: [], category: "Casa / Cucina" },
   { id: 8, item: "Caffè", assignedTo: ["Da comprare"], checkedBy: [], category: "Spesa comune" },
-  { id: 9, item: "Borse Frigo", assignedTo: ["Io", "Cla", "Onga", "Maddi", "Chiara"], checkedBy: [], category: "Mare & Viaggio" },
+  { id: 9, item: "Borse Frigo", assignedTo: ["Io (Luca)", "Cla", "Onga", "Maddi", "Chiara"], checkedBy: [], category: "Mare & Viaggio" },
   { id: 10, item: "Spruzzo Multiuso detergenti", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
   { id: 11, item: "Spugnetta per piatti", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
   { id: 12, item: "Detersivo per piatti", assignedTo: ["Chiedere alla struttura"], checkedBy: [], category: "Pulizia" },
@@ -93,7 +93,7 @@ export const checklistData = [
   { id: 16, item: "Cassa Audio Bluetooth", assignedTo: ["Bass"], checkedBy: [], category: "Svago" },
   { id: 17, item: "Quickstop / Carte da gioco", assignedTo: ["Meryland", "Dave"], checkedBy: [], category: "Svago" },
   { id: 18, item: "Pistole d'acqua Dave", assignedTo: ["Dave"], checkedBy: [], category: "Svago" },
-  { id: 19, item: "Schiscette e contenitori cibo", assignedTo: ["Maddi", "Io", "Meryland", "Onga"], checkedBy: [], category: "Mare & Viaggio" }
+  { id: 19, item: "Schiscette e contenitori cibo", assignedTo: ["Maddi", "Io (Luca)", "Meryland", "Onga"], checkedBy: [], category: "Mare & Viaggio" }
 ];
 
 export const scheduleData = [

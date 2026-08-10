@@ -9,7 +9,7 @@ import {
 import ExpensesTab from './components/ExpensesTab'
 
 const groupMembers = [
-  "Io",
+  "Io (Luca)",
   "Bass",
   "Cla",
   "Maddi",
@@ -28,7 +28,16 @@ function App() {
   const [checklist, setChecklist] = useState(() => {
     const saved = localStorage.getItem('toscana_checklist_v2')
     if (saved) {
-      try { return JSON.parse(saved) } catch (e) { console.error(e) }
+      try {
+        const parsed = JSON.parse(saved)
+        if (Array.isArray(parsed)) {
+          return parsed.map(item => ({
+            ...item,
+            assignedTo: (item.assignedTo || []).map(p => p === 'Io' ? 'Io (Luca)' : p),
+            checkedBy: (item.checkedBy || []).map(p => p === 'Io' ? 'Io (Luca)' : p)
+          }))
+        }
+      } catch (e) { console.error(e) }
     }
     return checklistData
   })
@@ -38,7 +47,7 @@ function App() {
 
   // New Item State
   const [newItemName, setNewItemName] = useState('')
-  const [newItemPersons, setNewItemPersons] = useState(['Io'])
+  const [newItemPersons, setNewItemPersons] = useState(['Io (Luca)'])
   const [newItemCategory, setNewItemCategory] = useState('Casa / Cucina')
   const [showAddForm, setShowAddForm] = useState(false)
 
@@ -100,7 +109,7 @@ function App() {
     const newItem = {
       id: Date.now(),
       item: newItemName.trim(),
-      assignedTo: newItemPersons.length > 0 ? newItemPersons : ['Io'],
+      assignedTo: newItemPersons.length > 0 ? newItemPersons : ['Io (Luca)'],
       checkedBy: [],
       category: newItemCategory
     }
@@ -828,7 +837,7 @@ function App() {
                     >
                       Tutti gli Oggetti
                     </button>
-                    {["Io", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga", "Da comprare"].map(p => (
+                    {["Io (Luca)", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga", "Da comprare"].map(p => (
                       <button
                         key={p}
                         onClick={() => setPersonFilter(p)}
