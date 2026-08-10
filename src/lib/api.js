@@ -56,6 +56,11 @@ function writeCache(kind, data) {
   } catch { /* quota piena: ignora */ }
 }
 
+/** Aggiorna la cache locale (usato anche per le rimozioni offline) */
+export function cacheItems(kind, items) {
+  writeCache(kind, items)
+}
+
 // ---------- Spese ----------
 export async function fetchExpenses() {
   return request('/api/expenses')

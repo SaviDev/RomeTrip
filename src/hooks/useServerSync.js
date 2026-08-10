@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { loadFromServer, syncCollection, pullFromServer, deleteItems, isBackendConfigured } from '../lib/api'
+import { loadFromServer, syncCollection, pullFromServer, deleteItems, cacheItems, isBackendConfigured } from '../lib/api'
 
 /**
  * Hook di sincronizzazione per una collezione (expenses | checklist).
@@ -27,9 +27,11 @@ export default function useServerSync(kind, fallbackItems) {
     setItems(prev => {
       const next = prev.filter(i => !idSet.has(String(i.id)))
       itemsRef.current = next
+      // Aggiorna anche la cache locale: altrimenti la spesa "ricompare" al refresh
+      cacheItems(kind, next)
       return next
     })
-  }, [])
+  }, [kind])
 
   const doSync = useCallback(async () => {
     if (!isBackendConfigured()) {
