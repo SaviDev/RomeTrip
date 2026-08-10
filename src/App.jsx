@@ -59,17 +59,25 @@ function App() {
     localStorage.setItem('toscana_checklist_v2', JSON.stringify(checklist))
   }, [checklist])
 
-  // Auto-detect current day if in trip period (August 11-14, 2026)
-  useEffect(() => {
+  // Calculate if today is within trip period (August 11-14, 2026)
+  const getTodayTripDayIndex = () => {
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth(); // 7 = August (0-indexed)
     const date = today.getDate();
 
-    if (year === 2026 && month === 7) {
-      if (date >= 11 && date <= 14) {
-        setActiveDay(date - 11);
-      }
+    if (year === 2026 && month === 7 && date >= 11 && date <= 14) {
+      return date - 11;
+    }
+    return null;
+  };
+
+  const todayTripDayIndex = getTodayTripDayIndex();
+
+  // Auto-detect current day if in trip period
+  useEffect(() => {
+    if (todayTripDayIndex !== null) {
+      setActiveDay(todayTripDayIndex);
     }
   }, []);
 
@@ -333,24 +341,32 @@ function App() {
 
             {/* Day Selector Buttons */}
             <div className="bg-white rounded-2xl p-2 shadow-md border border-amber-200/60 grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {scheduleData.map((dayObj, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveDay(idx)}
-                  className={`p-3 rounded-xl text-center transition-all flex flex-col items-center justify-center ${
-                    activeDay === idx
-                      ? 'bg-[#C85A32] text-white shadow-lg ring-2 ring-[#C85A32]/30 scale-[1.02]'
-                      : 'bg-stone-50 hover:bg-stone-100 text-stone-700'
-                  }`}
-                >
-                  <span className="text-[10px] font-black uppercase tracking-wider opacity-80">
-                    Giorno {idx + 1}
-                  </span>
-                  <span className="font-black text-xs sm:text-sm mt-0.5">
-                    {dayObj.day.split(' ')[0]} {dayObj.day.split(' ')[1]}
-                  </span>
-                </button>
-              ))}
+              {scheduleData.map((dayObj, idx) => {
+                const isToday = todayTripDayIndex === idx;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveDay(idx)}
+                    className={`p-3 rounded-xl text-center transition-all flex flex-col items-center justify-center relative ${
+                      activeDay === idx
+                        ? 'bg-[#C85A32] text-white shadow-lg ring-2 ring-[#C85A32]/30 scale-[1.02]'
+                        : 'bg-stone-50 hover:bg-stone-100 text-stone-700'
+                    }`}
+                  >
+                    {isToday && (
+                      <span className="absolute -top-2 -right-1 bg-amber-400 text-stone-900 text-[9px] font-black px-1.5 py-0.5 rounded-full shadow border border-amber-300 uppercase tracking-widest animate-pulse">
+                        ⚡ OGGI
+                      </span>
+                    )}
+                    <span className="text-[10px] font-black uppercase tracking-wider opacity-80">
+                      Giorno {idx + 1}
+                    </span>
+                    <span className="font-black text-xs sm:text-sm mt-0.5">
+                      {dayObj.day.split(' ')[0]} {dayObj.day.split(' ')[1]}
+                    </span>
+                  </button>
+                )
+              })}
             </div>
 
             {/* Day Card Details */}
