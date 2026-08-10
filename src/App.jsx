@@ -8,6 +8,7 @@ import {
 } from './data/schedule'
 import ExpensesTab from './components/ExpensesTab'
 import useServerSync from './hooks/useServerSync'
+import ServerConfigModal from './components/ServerConfigModal'
 
 const groupMembers = [
   "Io (Luca)",
@@ -34,6 +35,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('programma') // 'programma', 'logistica', 'alloggio', 'costi', 'checklist'
   const [activeDay, setActiveDay] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [serverModalOpen, setServerModalOpen] = useState(false)
   const {
     items: checklist,
     setItems: setChecklist,
@@ -167,6 +169,15 @@ function App() {
 
           {/* Quick Nav Header Buttons */}
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setServerModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-2 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 text-xs font-bold rounded-xl shadow-md transition-all active:scale-95"
+              title="Configura Server Dedicated PC Sync"
+            >
+              <span>⚙️</span>
+              <span className="hidden sm:inline">Server PC</span>
+            </button>
+
             <a
               href={lodgingData.mapsUrl}
               target="_blank"
@@ -1025,6 +1036,13 @@ function App() {
         <p className="font-[#E5A93C] font-bold text-amber-200">🍷 TOSCANA 2026 • Ritiro Estivo in Maremma 🌾</p>
         <p className="text-stone-400 text-[11px] mt-1 font-medium">Poderi Di Montemerano • 11 - 14 Agosto 2026</p>
       </footer>
+
+      {/* Server Config Modal */}
+      <ServerConfigModal
+        isOpen={serverModalOpen}
+        onClose={() => setServerModalOpen(false)}
+        onConfigSaved={() => window.location.reload()}
+      />
 
     </div>
   )

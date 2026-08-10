@@ -9,25 +9,51 @@
  * offline per il primo render e per quando il server non è raggiungibile.
  */
 
-const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
-const API_TOKEN = import.meta.env.VITE_API_TOKEN || 'toscana2026-maremma'
+export function getApiUrl() {
+  const customUrl = localStorage.getItem('toscana_custom_api_url')
+  const envUrl = import.meta.env.VITE_API_URL || ''
+  const raw = customUrl !== null && customUrl !== '' ? customUrl : envUrl
+  return raw.replace(/\/+$/, '')
+}
+
+export function getApiToken() {
+  const customToken = localStorage.getItem('toscana_custom_api_token')
+  const envToken = import.meta.env.VITE_API_TOKEN || 'toscana2026-maremma'
+  return customToken !== null && customToken !== '' ? customToken : envToken
+}
+
+export function setCustomBackendConfig(url, token) {
+  if (url !== null && url !== undefined) {
+    localStorage.setItem('toscana_custom_api_url', url.trim())
+  }
+  if (token !== null && token !== undefined) {
+    localStorage.setItem('toscana_custom_api_token', token.trim())
+  }
+}
+
+export function clearCustomBackendConfig() {
+  localStorage.removeItem('toscana_custom_api_url')
+  localStorage.removeItem('toscana_custom_api_token')
+}
 
 const CACHE_KEYS = {
   expenses: 'toscana_spese_v1',
   checklist: 'toscana_checklist_v2',
 }
 
-export const isBackendConfigured = () => API_URL !== ''
+export const isBackendConfigured = () => getApiUrl() !== ''
 
 function headers() {
   return {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + API_TOKEN,
+    'Authorization': 'Bearer ' + getApiToken(),
   }
 }
 
 async function request(path, options = {}) {
-  const res = await fetch(`${API_URL}${path}`, {
+  const baseUrl = getApiUrl()
+  if (!baseUrl) throw new Error('Backend non configurato')
+  const res = await fetch(`${baseUrl}${path}`, {
     ...options,
     headers: headers(),
   })
