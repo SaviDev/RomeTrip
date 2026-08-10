@@ -6,6 +6,7 @@ import {
   costsData,
   checklistData
 } from './data/schedule'
+import ExpensesTab from './components/ExpensesTab'
 
 const groupMembers = [
   "Io",
@@ -182,7 +183,7 @@ function App() {
         {/* Header Navigation Dropdown */}
         {menuOpen && (
           <div className="relative z-50 bg-[#27342D] border-t border-amber-500/20 shadow-2xl px-4 sm:px-5 py-4 animate-fadeIn">
-            <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-5 gap-2">
+            <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-6 gap-2">
               <button
                 onClick={() => { setActiveTab('programma'); setMenuOpen(false); }}
                 className={`p-3 rounded-xl text-left font-bold text-xs flex flex-col gap-1 transition-all ${
@@ -190,6 +191,24 @@ function App() {
                 }`}
               >
                 <span className="text-base">📅</span> Programma
+              </button>
+
+              <button
+                onClick={() => { setActiveTab('spese'); setMenuOpen(false); }}
+                className={`p-3 rounded-xl text-left font-bold text-xs flex flex-col gap-1 transition-all ${
+                  activeTab === 'spese' ? 'bg-[#C85A32] text-white shadow-md' : 'bg-white/5 text-amber-100 hover:bg-white/10'
+                }`}
+              >
+                <span className="text-base">💶</span> Spese
+              </button>
+
+              <button
+                onClick={() => { setActiveTab('checklist'); setMenuOpen(false); }}
+                className={`p-3 rounded-xl text-left font-bold text-xs flex flex-col gap-1 transition-all ${
+                  activeTab === 'checklist' ? 'bg-[#C85A32] text-white shadow-md' : 'bg-white/5 text-amber-100 hover:bg-white/10'
+                }`}
+              >
+                <span className="text-base">🎒</span> Checklist
               </button>
 
               <button
@@ -217,15 +236,6 @@ function App() {
                 }`}
               >
                 <span className="text-base">💰</span> Budget & Costi
-              </button>
-
-              <button
-                onClick={() => { setActiveTab('checklist'); setMenuOpen(false); }}
-                className={`p-3 rounded-xl text-left font-bold text-xs flex flex-col gap-1 transition-all ${
-                  activeTab === 'checklist' ? 'bg-[#C85A32] text-white shadow-md' : 'bg-white/5 text-amber-100 hover:bg-white/10'
-                }`}
-              >
-                <span className="text-base">🎒</span> Cose da Portare
               </button>
             </div>
 
@@ -258,6 +268,22 @@ function App() {
             <span>📅</span> Programma
           </button>
           <button
+            onClick={() => setActiveTab('spese')}
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-extrabold text-[11px] sm:text-xs flex items-center gap-1 shrink-0 transition-all ${
+              activeTab === 'spese' ? 'bg-[#E5A93C] text-[#1E2923] shadow-md scale-105' : 'hover:bg-white/10 text-white/90'
+            }`}
+          >
+            <span>💶</span> Spese
+          </button>
+          <button
+            onClick={() => setActiveTab('checklist')}
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-extrabold text-[11px] sm:text-xs flex items-center gap-1 shrink-0 transition-all ${
+              activeTab === 'checklist' ? 'bg-[#E5A93C] text-[#1E2923] shadow-md scale-105' : 'hover:bg-white/10 text-white/90'
+            }`}
+          >
+            <span>🎒</span> Checklist
+          </button>
+          <button
             onClick={() => setActiveTab('logistica')}
             className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-extrabold text-[11px] sm:text-xs flex items-center gap-1 shrink-0 transition-all ${
               activeTab === 'logistica' ? 'bg-[#E5A93C] text-[#1E2923] shadow-md scale-105' : 'hover:bg-white/10 text-white/90'
@@ -281,19 +307,16 @@ function App() {
           >
             <span>💰</span> Costi
           </button>
-          <button
-            onClick={() => setActiveTab('checklist')}
-            className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-extrabold text-[11px] sm:text-xs flex items-center gap-1 shrink-0 transition-all ${
-              activeTab === 'checklist' ? 'bg-[#E5A93C] text-[#1E2923] shadow-md scale-105' : 'hover:bg-white/10 text-white/90'
-            }`}
-          >
-            <span>🎒</span> Checklist
-          </button>
         </div>
       </nav>
 
       {/* Main Container */}
       <main className="w-full max-w-4xl p-3 sm:p-6 flex-grow overflow-x-hidden min-w-0">
+
+        {/* TAB: SPESE (TRICOUNT) */}
+        {activeTab === 'spese' && (
+          <ExpensesTab groupMembers={groupMembers} />
+        )}
 
         {/* TAB 1: PROGRAMMA DEL GIORNO */}
         {activeTab === 'programma' && (
