@@ -25,3 +25,10 @@ dist-ssr
 
 # Project docs folder (raw files)
 doc/
+
+# Backend Toscana 2026
+backend/node_modules
+backend/data/
+
+# Env (contiene URL e token del backend)
+.env

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import useServerSync from '../hooks/useServerSync'
 
 const DEFAULT_MEMBERS = [
   "Io (Luca)",
@@ -46,24 +47,15 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
   // Filter members to actual participants (exclude helper tags if passed from app)
   const participants = groupMembers.filter(m => m !== "Da comprare" && m !== "Chiedere alla struttura")
 
-  const [expenses, setExpenses] = useState(() => {
-    const saved = localStorage.getItem('toscana_spese_v1')
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved)
-        if (Array.isArray(parsed) && parsed.length >= 0) {
-          return parsed.map(exp => ({
-            ...exp,
-            payer: exp.payer === 'Io' ? 'Io (Luca)' : exp.payer,
-            involved: (exp.involved || []).map(p => p === 'Io' ? 'Io (Luca)' : p)
-          }))
-        }
-      } catch (e) {
-        console.error("Errore caricamento spese:", e)
-      }
-    }
-    return INITIAL_EXPENSES
-  })
+  const {
+    items: expenses,
+    setItems: setExpenses,
+    online: expensesOnline,
+  } = useServerSync('expenses', INITIAL_EXPENSES.map(exp => ({
+    ...exp,
+    payer: exp.payer === 'Io' ? 'Io (Luca)' : exp.payer,
+    involved: (exp.involved || []).map(p => p === 'Io' ? 'Io (Luca)' : p)
+  })))
 
   // State for Add / Edit Form
   const [showForm, setShowForm] = useState(false)
@@ -80,11 +72,6 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
   const [selectedPerson, setSelectedPerson] = useState('tutti')
   const [categoryFilter, setCategoryFilter] = useState('tutti')
   const [copiedNotification, setCopiedNotification] = useState(false)
-
-  // Save to localStorage on change
-  useEffect(() => {
-    localStorage.setItem('toscana_spese_v1', JSON.stringify(expenses))
-  }, [expenses])
 
   // Open edit modal / form with existing data
   const handleStartEdit = (exp) => {
@@ -332,6 +319,15 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
             <p className="text-xs sm:text-sm text-stone-300 mt-1 font-medium">
               Aggiungi le spese fatte, dividi i costi con chi partecipa e pareggia i conti senza stress!
             </p>
+            {expensesOnline ? (
+              <span className="inline-flex items-center gap-1 mt-1.5 text-[10px] font-bold text-emerald-300 bg-emerald-500/15 border border-emerald-400/30 px-2 py-0.5 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Sincronizzato con il server
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 mt-1.5 text-[10px] font-bold text-amber-300 bg-amber-500/15 border border-amber-400/30 px-2 py-0.5 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Modalità offline (solo questo dispositivo)
+              </span>
+            )}
           </div>
 
           <button

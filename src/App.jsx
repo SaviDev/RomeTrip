@@ -7,6 +7,7 @@ import {
   checklistData
 } from './data/schedule'
 import ExpensesTab from './components/ExpensesTab'
+import useServerSync from './hooks/useServerSync'
 
 const groupMembers = [
   "Io (Luca)",
@@ -21,26 +22,23 @@ const groupMembers = [
   "Chiedere alla struttura"
 ]
 
+function normalizeChecklistItem(item) {
+  return {
+    ...item,
+    assignedTo: (item.assignedTo || []).map(p => p === 'Io' ? 'Io (Luca)' : p),
+    checkedBy: (item.checkedBy || []).map(p => p === 'Io' ? 'Io (Luca)' : p)
+  }
+}
+
 function App() {
   const [activeTab, setActiveTab] = useState('programma') // 'programma', 'logistica', 'alloggio', 'costi', 'checklist'
   const [activeDay, setActiveDay] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [checklist, setChecklist] = useState(() => {
-    const saved = localStorage.getItem('toscana_checklist_v2')
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved)
-        if (Array.isArray(parsed)) {
-          return parsed.map(item => ({
-            ...item,
-            assignedTo: (item.assignedTo || []).map(p => p === 'Io' ? 'Io (Luca)' : p),
-            checkedBy: (item.checkedBy || []).map(p => p === 'Io' ? 'Io (Luca)' : p)
-          }))
-        }
-      } catch (e) { console.error(e) }
-    }
-    return checklistData
-  })
+  const {
+    items: checklist,
+    setItems: setChecklist,
+    online: checklistOnline,
+  } = useServerSync('checklist', checklistData.map(normalizeChecklistItem))
   const [checklistFilter, setChecklistFilter] = useState('tutti')
   const [personFilter, setPersonFilter] = useState('tutti')
   const [numPeople, setNumPeople] = useState(9)
@@ -53,11 +51,6 @@ function App() {
 
   // Edit item assigned people inline state
   const [editingItemId, setEditingItemId] = useState(null)
-
-  // Save checklist to localStorage
-  useEffect(() => {
-    localStorage.setItem('toscana_checklist_v2', JSON.stringify(checklist))
-  }, [checklist])
 
   // Calculate if today is within trip period (August 11-14, 2026)
   const getTodayTripDayIndex = () => {
@@ -334,7 +327,6 @@ function App() {
         {activeTab === 'spese' && (
           <ExpensesTab groupMembers={groupMembers} />
         )}
-
         {/* TAB 1: PROGRAMMA DEL GIORNO */}
         {activeTab === 'programma' && (
           <div className="animate-fadeIn space-y-6">
@@ -745,6 +737,15 @@ function App() {
                   <p className="text-xs text-stone-500 font-medium mt-0.5 leading-tight">
                     Clicca sul tuo nome per spuntare se hai preso l'oggetto! ({totalCheckedSlots} di {totalAssignedSlots} spunte completate)
                   </p>
+                  {checklistOnline ? (
+                    <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Sincronizzato con il server
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> Modalità offline (solo questo dispositivo)
+                    </span>
+                  )}
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-start sm:justify-end">
