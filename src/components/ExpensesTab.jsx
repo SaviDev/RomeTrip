@@ -186,6 +186,13 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
     }
   }
 
+  // Handle restoring / undoing a consolidated settlement
+  const handleUndoSettlement = (expId, title) => {
+    if (window.confirm(`Vuoi ripristinare il rimborso "${title}" e riportarlo tra le spese da saldare?`)) {
+      setExpenses(prev => prev.filter(e => e.id !== expId))
+    }
+  }
+
   // Toggle person in involved list
   const toggleInvolved = (person) => {
     if (involved.includes(person)) {
@@ -277,6 +284,7 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
   }
 
   const settlements = calculateSettlements()
+  const consolidatedExpenses = expenses.filter(e => e.category === '💸 Rimborso / Pareggio')
 
   // Filtered expenses list
   const filteredExpenses = expenses.filter(exp => {
@@ -830,6 +838,39 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
             </button>
           </div>
 
+          {/* Person Filter for Settlements */}
+          <div className="bg-stone-50 p-3 rounded-2xl border border-stone-200">
+            <span className="text-[10px] font-black uppercase tracking-widest text-stone-500 block mb-1.5">
+              👤 Filtra rimborsi per persona:
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              <button
+                onClick={() => setSelectedPerson('tutti')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                  selectedPerson === 'tutti'
+                    ? 'bg-[#1E2923] text-white shadow'
+                    : 'bg-white text-stone-600 hover:bg-stone-100 border border-stone-200'
+                }`}
+              >
+                Tutti ({settlements.length})
+              </button>
+              {participants.map(p => (
+                <button
+                  key={p}
+                  onClick={() => setSelectedPerson(p)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                    selectedPerson === p
+                      ? 'bg-[#C85A32] text-white shadow'
+                      : 'bg-white text-stone-600 hover:bg-stone-100 border border-stone-200'
+                  }`}
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* ACTIVE SETTLEMENTS */}
           {settlements.length === 0 ? (
             <div className="p-8 text-center bg-emerald-50 rounded-2xl border border-emerald-200">
               <span className="text-4xl block mb-2">🎉</span>
@@ -838,39 +879,6 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
             </div>
           ) : (
             <div className="space-y-4">
-
-              {/* Person Filter for Settlements */}
-              <div className="bg-stone-50 p-3 rounded-2xl border border-stone-200">
-                <span className="text-[10px] font-black uppercase tracking-widest text-stone-500 block mb-1.5">
-                  👤 Filtra rimborsi per persona:
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  <button
-                    onClick={() => setSelectedPerson('tutti')}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
-                      selectedPerson === 'tutti'
-                        ? 'bg-[#1E2923] text-white shadow'
-                        : 'bg-white text-stone-600 hover:bg-stone-100 border border-stone-200'
-                    }`}
-                  >
-                    Tutti ({settlements.length})
-                  </button>
-                  {participants.map(p => (
-                    <button
-                      key={p}
-                      onClick={() => setSelectedPerson(p)}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
-                        selectedPerson === p
-                          ? 'bg-[#C85A32] text-white shadow'
-                          : 'bg-white text-stone-600 hover:bg-stone-100 border border-stone-200'
-                      }`}
-                    >
-                      {p}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               <span className="text-xs font-black uppercase tracking-wider text-stone-400 block">
                 Rimborsi da effettuare ({settlements.filter(s => selectedPerson === 'tutti' || s.from === selectedPerson || s.to === selectedPerson).length}):
               </span>
@@ -920,6 +928,62 @@ export default function ExpensesTab({ groupMembers = DEFAULT_MEMBERS }) {
                         <span>✅</span>
                         <span>Segna come Pagato / Consolidato</span>
                       </button>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {/* SECTION: STORICO RIMBORSI CONSOLIDATI */}
+          {consolidatedExpenses.length > 0 && (
+            <div className="mt-8 pt-6 border-t border-stone-200 space-y-3">
+              <div className="flex justify-between items-center flex-wrap gap-2">
+                <h4 className="font-black text-sm text-[#1E2923] flex items-center gap-1.5">
+                  <span>📜 Storico Rimborsi Consolidati</span>
+                  <span className="text-xs text-emerald-800 bg-emerald-100 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+                    {consolidatedExpenses.length} effettuati
+                  </span>
+                </h4>
+                <span className="text-[11px] text-stone-400 font-semibold">
+                  Puoi ripristinare qualsiasi rimborso in qualsiasi momento
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {consolidatedExpenses
+                  .filter(exp => selectedPerson === 'tutti' || exp.payer === selectedPerson || (exp.involved && exp.involved.includes(selectedPerson)))
+                  .map(exp => (
+                    <div
+                      key={exp.id}
+                      className="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-200 shadow-sm flex flex-col justify-between gap-2"
+                    >
+                      <div className="flex items-center justify-between gap-2 border-b border-emerald-200/60 pb-2">
+                        <div className="min-w-0">
+                          <span className="font-black text-xs text-emerald-950 block truncate">
+                            {exp.title}
+                          </span>
+                          <span className="text-[10px] text-emerald-700 font-medium">
+                            {exp.date ? `Data: ${exp.date}` : 'Consolidato'}
+                          </span>
+                        </div>
+                        <span className="text-xs font-black text-emerald-900 bg-white px-2.5 py-1 rounded-xl border border-emerald-300 font-mono shrink-0">
+                          € {exp.amount.toFixed(2)}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center justify-between gap-2 pt-0.5">
+                        <span className="text-[11px] font-bold text-emerald-800 flex items-center gap-1">
+                          <span>✓</span> Pagato da <strong>{exp.payer}</strong> a <strong>{exp.involved[0]}</strong>
+                        </span>
+
+                        <button
+                          onClick={() => handleUndoSettlement(exp.id, exp.title)}
+                          className="px-2.5 py-1 bg-white hover:bg-stone-100 text-stone-700 hover:text-red-700 text-[10px] font-bold rounded-lg border border-stone-300 shadow-xs transition-all flex items-center gap-1 active:scale-95 shrink-0"
+                          title="Ripristina e riporta questo rimborso tra quelli da effettuare"
+                        >
+                          <span>↩️</span> Ripristina
+                        </button>
+                      </div>
                     </div>
                   ))}
               </div>
