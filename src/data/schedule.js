@@ -28,11 +28,11 @@ export const logisticsData = {
 
 export const costsData = {
   sharedFixed: [
-    { item: "Alloggio (Podere Sèmia)", totalCost: 1111.91, perPerson: 123.55, note: "Totale alloggio per la durata del soggiorno" },
-    { item: "Carburante / Auto (pieni stimati)", totalCost: 180.00, perPerson: 30.00, note: "180€ totali per 3 auto / pieni (circa 15-30€ a testa su 6-9 pers)" },
-    { item: "Tassa di soggiorno", totalCost: 36.00, perPerson: 4.00, note: "4€ a persona" }
+    { item: "Alloggio (Podere Sèmia)", totalCost: 1111.91, perPerson: 101.08, note: "Totale alloggio per la durata del soggiorno (su 11 persone)" },
+    { item: "Carburante / Auto (pieni stimati)", totalCost: 180.00, perPerson: 16.36, note: "180€ totali per 3 auto / pieni (circa 16€ a testa su 11 pers)" },
+    { item: "Tassa di soggiorno", totalCost: 36.00, perPerson: 3.27, note: "3.27€ a persona (11 persone)" }
   ],
-  subtotalFixedPerPerson: 157.55,
+  subtotalFixedPerPerson: 120.71,
   dailyBreakdown: [
     {
       day: "Giorno 1 (11 Agosto)",

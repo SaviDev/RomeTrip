@@ -19,6 +19,9 @@ const groupMembers = [
   "Dave",
   "Chiara",
   "Onga",
+  "Agno",
+  "Sofi",
+  "Cardin",
   "Da comprare",
   "Chiedere alla struttura"
 ]
@@ -44,7 +47,7 @@ function App() {
   } = useServerSync('checklist', checklistData.map(normalizeChecklistItem))
   const [checklistFilter, setChecklistFilter] = useState('tutti')
   const [personFilter, setPersonFilter] = useState('tutti')
-  const [numPeople, setNumPeople] = useState(9)
+  const [numPeople, setNumPeople] = useState(11)
 
   // New Item State
   const [newItemName, setNewItemName] = useState('')

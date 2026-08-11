@@ -9,7 +9,10 @@ const DEFAULT_MEMBERS = [
   "Meryland",
   "Dave",
   "Chiara",
-  "Onga"
+  "Onga",
+  "Agno",
+  "Sofi",
+  "Cardin"
 ]
 
 const CATEGORIES = [
@@ -28,7 +31,7 @@ const INITIAL_EXPENSES = [
     title: 'Caparra Poderi Di Montemerano',
     amount: 300,
     payer: 'Dave',
-    involved: ["Io (Luca)", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga"],
+    involved: ["Io (Luca)", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga", "Agno", "Sofi", "Cardin"],
     category: '🏠 Alloggio / Struttura',
     date: '2026-08-01'
   },
@@ -37,7 +40,7 @@ const INITIAL_EXPENSES = [
     title: 'Prima Spesa Conad Albinia (Cibo & Bevande)',
     amount: 120,
     payer: 'Bass',
-    involved: ["Io (Luca)", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga"],
+    involved: ["Io (Luca)", "Bass", "Cla", "Maddi", "Meryland", "Dave", "Chiara", "Onga", "Agno", "Sofi", "Cardin"],
     category: '🛒 Spesa / Cibo',
     date: '2026-08-11'
   }
