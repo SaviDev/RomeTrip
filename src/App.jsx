@@ -183,7 +183,7 @@ function App() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3 py-2 bg-[#C85A32] hover:bg-[#a64724] text-white text-xs font-bold rounded-xl shadow-md transition-all active:scale-95"
-              title="Mappa Casa Poderi Di Montemerano"
+              title="Mappa Casa Podere Sèmia"
             >
               <span>🏡</span>
               <span className="hidden sm:inline">Mappa Casa</span>
@@ -271,7 +271,7 @@ function App() {
                 <span>📸</span> Cartella Foto Drive
               </a>
               <span className="text-[10px] text-amber-200/50 uppercase tracking-widest font-mono">
-                Poderi Di Montemerano
+                Podere Sèmia
               </span>
             </div>
           </div>
@@ -581,7 +581,7 @@ function App() {
               <div className="relative rounded-2xl overflow-hidden mb-6 h-48 sm:h-64 bg-stone-900 shadow-md">
                 <img
                   src="/tuscany_hero.png"
-                  alt="Poderi Di Montemerano"
+                  alt="Podere Sèmia"
                   className="w-full h-full object-cover opacity-85"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-5 text-white">
@@ -1034,7 +1034,7 @@ function App() {
       {/* Footer Banner */}
       <footer className="w-full bg-[#1E2923] text-white py-6 px-4 border-t border-amber-500/20 text-center text-xs">
         <p className="font-[#E5A93C] font-bold text-amber-200">🍷 TOSCANA 2026 • Ritiro Estivo in Maremma 🌾</p>
-        <p className="text-stone-400 text-[11px] mt-1 font-medium">Poderi Di Montemerano • 11 - 14 Agosto 2026</p>
+        <p className="text-stone-400 text-[11px] mt-1 font-medium">Podere Sèmia • 11 - 14 Agosto 2026</p>
       </footer>
 
       {/* Server Config Modal */}

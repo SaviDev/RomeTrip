@@ -1,12 +1,12 @@
 export const lodgingData = {
-  name: "Poderi Di Montemerano",
-  address: "Via del Santarello 35, Manciano (GR)",
+  name: "Podere Sèmia (Poggio Cucco)",
+  address: "58014 Poderi (GR)",
   dates: "11 - 14 Agosto 2026",
   duration: "4 giorni / 3 notti",
   checkIn: "Dalle 15:00 alle 19:00 (Arrivo previsto h 11:00)",
   checkOut: "Dalle 08:00 alle 11:00",
   bookingUrl: "https://www.booking.com/hotel/it/poderi-di-montemerano.it.html",
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano+Via+del+Santarello+35+Manciano",
+  mapsUrl: "https://www.google.com/maps/place/Podere+S%C3%A8mia+(Poggio+Cucco),+58014+Poderi+GR/data=!4m2!3m1!1s0x132903bd3f7553f7:0x925ba0c11ca48922!18m1!1e1",
   notes: "Sistemazione immersa nella serena Maremma Toscana, con spazi esterni e piscina. Ideale per relax e grigliate!"
 };
 
@@ -28,7 +28,7 @@ export const logisticsData = {
 
 export const costsData = {
   sharedFixed: [
-    { item: "Alloggio (Poderi Di Montemerano)", totalCost: 1111.91, perPerson: 123.55, note: "Totale alloggio per la durata del soggiorno" },
+    { item: "Alloggio (Podere Sèmia)", totalCost: 1111.91, perPerson: 123.55, note: "Totale alloggio per la durata del soggiorno" },
     { item: "Carburante / Auto (pieni stimati)", totalCost: 180.00, perPerson: 30.00, note: "180€ totali per 3 auto / pieni (circa 15-30€ a testa su 6-9 pers)" },
     { item: "Tassa di soggiorno", totalCost: 36.00, perPerson: 4.00, note: "4€ a persona" }
   ],
@@ -119,10 +119,10 @@ export const scheduleData = [
       },
       {
         time: "11:00",
-        title: "Arrivo ai Poderi Di Montemerano",
+        title: "Arrivo ai Podere Sèmia",
         location: "Via del Santarello 35, Manciano (GR)",
         notes: "Primo contatto con la struttura e scarico bagagli preliminare. L'arrivo anticipato consente di godersi la prima mezza giornata.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano+Via+del+Santarello+35+Manciano",
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia+Via+del+Santarello+35+Manciano",
         link: { label: "🏨 Link Booking Alloggio", url: "https://www.booking.com/hotel/it/poderi-di-montemerano.it.html" }
       },
       {
@@ -135,9 +135,9 @@ export const scheduleData = [
       {
         time: "15:00 - 19:00",
         title: "Check-in & Sistemazione Camere",
-        location: "Poderi Di Montemerano",
+        location: "Podere Sèmia",
         notes: "Orario ufficiale di Check-in. Assegnazione camere e relax iniziale.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia"
       },
       {
         time: "16:30",
@@ -169,9 +169,9 @@ export const scheduleData = [
       {
         time: "08:30",
         title: "Colazione & Preparazione Pranzo al Sacco",
-        location: "Poderi Di Montemerano",
+        location: "Podere Sèmia",
         notes: "Colazione in struttura e preparazione borse frigo e pasta fredda per il mare.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia"
       },
       {
         time: "09:30",
@@ -197,16 +197,16 @@ export const scheduleData = [
       {
         time: "18:00",
         title: "Rientro in Struttura & Docce",
-        location: "Poderi Di Montemerano",
+        location: "Podere Sèmia",
         notes: "Rientro a casa, doccia rigenerante e momento aperitivo in giardino/piscina.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia"
       },
       {
         time: "20:30",
         title: "Cena a Casa: Bruschettata!",
-        location: "Poderi Di Montemerano",
+        location: "Podere Sèmia",
         notes: "Cena conviviale all'aperto a casa con super bruschette miste (pomodoro, olio locale, affettati, formaggi), musica e giochi di società.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia"
       }
     ]
   },
@@ -221,14 +221,14 @@ export const scheduleData = [
         title: "Mattinata Mare (Opzionale) o Relax a Casa",
         location: "Struttura o Spiaggia Vicina",
         notes: "Scelta libera: puntata rapida al mare oppure colazione senza fretta in veranda.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia"
       },
       {
         time: "11:30",
         title: "Piscina & Solarium ai Poderi",
-        location: "Piscina Poderi Di Montemerano",
+        location: "Piscina Podere Sèmia",
         notes: "Permanenza in piscina, lettini, sole, musica con la cassa di Bass e totale tranquillità.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia"
       },
       {
         time: "16:30",
@@ -241,16 +241,16 @@ export const scheduleData = [
       {
         time: "19:00",
         title: "Preparazione Grigliata BBQ",
-        location: "Area Barbecue Poderi Di Montemerano",
+        location: "Area Barbecue Podere Sèmia",
         notes: "Accensione carbonella, preparazione delle carni e verdure locali acquistate durante il giorno.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia"
       },
       {
         time: "20:30",
         title: "Maxi Grigliata & Festa di Chiusura",
         location: "Giardino Struttura",
         notes: "Cena sociale all'aperto, grigliata, brindisi, giochi con carte / Quickstop e pistole d'acqua di Dave!",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia"
       }
     ]
   },
@@ -263,16 +263,16 @@ export const scheduleData = [
       {
         time: "08:30",
         title: "Prima Colazione & Sistemazione Valigie",
-        location: "Poderi Di Montemerano",
+        location: "Podere Sèmia",
         notes: "Ultima colazione in Maremma, chiusura bagagli e pulizia sommaria.",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia"
       },
       {
         time: "08:00 - 11:00",
         title: "Check-out ufficiale dalla Struttura",
-        location: "Poderi Di Montemerano",
+        location: "Podere Sèmia",
         notes: "Consegna chiavi ed espletamento delle procedure di partenza (entro le ore 11:00).",
-        maps: "https://www.google.com/maps/search/?api=1&query=Poderi+Di+Montemerano"
+        maps: "https://www.google.com/maps/search/?api=1&query=Podere+S%C3%A8mia"
       },
       {
         time: "11:30",
